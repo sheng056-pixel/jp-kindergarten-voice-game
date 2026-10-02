@@ -584,6 +584,166 @@
     .review-item .jp { font-weight: 800; font-size: 1.05rem; }
     .review-item .zh { font-size: 0.85rem; color: var(--muted); }
 
+
+    /* Favorites */
+    .fav-btn {
+      appearance: none;
+      border: 2px solid #ffd2b0;
+      background: #fffaf5;
+      border-radius: 999px;
+      min-height: 44px;
+      min-width: 44px;
+      padding: 8px 14px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      font-family: inherit;
+      color: var(--text);
+      cursor: pointer;
+      box-shadow: 0 3px 0 rgba(0,0,0,0.06);
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .fav-btn.on {
+      background: #fff3c4;
+      border-color: #ffd54f;
+      color: #b8860b;
+    }
+    .fav-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+    .fav-note-row {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .fav-note-row label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 700;
+      text-align: left;
+    }
+    .fav-note-row textarea {
+      width: 100%;
+      min-height: 56px;
+      border: 2px solid #ffe0c8;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: #fffaf5;
+      resize: vertical;
+    }
+    .fav-note-row .fav-note-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .fav-note-row .fav-note-actions button {
+      flex: 1 1 120px;
+      min-height: 44px;
+    }
+    .favorites-section {
+      width: 100%;
+      margin-top: 4px;
+    }
+    .favorites-section .fav-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .favorites-section .fav-head h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .favorites-section .fav-empty {
+      font-size: 0.88rem;
+      color: var(--muted);
+      text-align: center;
+      margin: 0;
+      padding: 10px 6px;
+      background: #fffaf5;
+      border: 1px dashed #efd5c5;
+      border-radius: 14px;
+    }
+    .fav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: #fffaf5;
+      border: 1px solid #efd5c5;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      font-family: inherit;
+      color: inherit;
+    }
+    .fav-item:active { background: #fff3e8; }
+    .fav-item img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .fav-item .meta { flex: 1; min-width: 0; }
+    .fav-item .jp { font-weight: 800; font-size: 1.05rem; }
+    .fav-item .zh { font-size: 0.85rem; color: var(--muted); }
+    .fav-item .note {
+      font-size: 0.8rem;
+      color: #8a6d3b;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .fav-item .fav-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .fav-item .fav-mini {
+      appearance: none;
+      border: 1px solid #efd5c5;
+      background: #fff;
+      border-radius: 10px;
+      padding: 6px 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      color: var(--text);
+      min-height: 36px;
+    }
+    .visitor-stat {
+      width: 100%;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin: 0;
+      padding: 8px 10px;
+      background: #f5faf9;
+      border: 1px solid #d5ebe8;
+      border-radius: 14px;
+      line-height: 1.4;
+    }
+    .visitor-stat .num {
+      color: #2a7a74;
+      font-weight: 800;
+    }
+    .top-bar .fav-btn {
+      flex-shrink: 0;
+    }
+
     @media (max-width: 380px) {
       .choices { grid-template-columns: 1fr; }
       .choice-btn { font-size: 1.25rem; padding: 16px 12px; }
@@ -641,6 +801,20 @@
         <button type="button" class="btn-good" id="btnFreePlay">🎮 自由練習（全部）</button>
       </div>
 
+      <div class="favorites-section" id="favoritesSection">
+        <div class="fav-head">
+          <h3>⭐ 我的收藏</h3>
+          <span id="favCountBadge" style="font-size:0.82rem;color:var(--muted);font-weight:700">0</span>
+        </div>
+        <p class="fav-empty" id="favEmpty">尚未收藏單字。作答時可點 ☆ 加入並寫備註。</p>
+        <div class="review-list" id="favoritesList"></div>
+      </div>
+
+      <p class="visitor-stat" id="visitorStat" aria-live="polite">
+        累計瀏覽（約）：<span class="num" id="visitorCount">—</span>
+        <br /><span style="font-size:0.75rem;font-weight:600">約略值・若無法連線則暫不顯示</span>
+      </p>
+
       <div id="reviewPreview" class="hidden" style="width:100%">
         <p class="home-hint" style="margin-bottom:6px;font-weight:700;color:var(--text)">最近錯題／可複習：</p>
         <div class="review-list" id="reviewList"></div>
@@ -659,6 +833,15 @@
       <div class="top-bar">
         <button type="button" class="btn-soft btn-home" id="btnBackHome">← 回首頁</button>
         <span id="modeBadge" style="font-size:0.85rem;font-weight:700;color:var(--muted)">今日測驗</span>
+        <button type="button" class="fav-btn" id="btnFavorite" aria-pressed="false" title="收藏此單字">☆ 收藏</button>
+      </div>
+      <div class="fav-note-row hidden" id="favNoteRow">
+        <label for="favNoteInput">收藏備註（選填）</label>
+        <textarea id="favNoteInput" maxlength="120" placeholder="例如：容易和「はな」搞混…"></textarea>
+        <div class="fav-note-actions">
+          <button type="button" class="btn-soft" id="btnFavNoteCancel">取消</button>
+          <button type="button" class="btn-primary" id="btnFavNoteSave">儲存收藏</button>
+        </div>
       </div>
 
       <div class="scorebar">
@@ -1240,7 +1423,7 @@
     }
 
     function emptyStore() {
-      return { streak: 0, lastCompletedDate: null, days: {}, wrongIds: [], examSizeVersion: EXAM_SIZE_VERSION };
+      return { streak: 0, lastCompletedDate: null, days: {}, wrongIds: [], favorites: {}, examSizeVersion: EXAM_SIZE_VERSION };
     }
 
     function hasDayProgress(rec) {
@@ -1253,6 +1436,9 @@
       if (!data.days) data.days = {};
       if (!Array.isArray(data.wrongIds)) data.wrongIds = [];
       if (typeof data.streak !== "number") data.streak = 0;
+      if (!data.favorites || typeof data.favorites !== "object" || Array.isArray(data.favorites)) {
+        data.favorites = {};
+      }
 
       // One-time: preserve any prior progress under ANCHOR_TODAY by moving it to ANCHOR_YESTERDAY,
       // then force ANCHOR_TODAY to a fresh 10-question exam. Never wipe existing Oct 1 answers.
@@ -1316,6 +1502,204 @@
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       } catch (_) {}
     }
+
+    /* ========== Favorites (localStorage) ========== */
+    function getFavoritesMap() {
+      const store = loadStore();
+      if (!store.favorites || typeof store.favorites !== "object") store.favorites = {};
+      return store.favorites;
+    }
+
+    function isFavorite(itemId) {
+      const favs = getFavoritesMap();
+      return !!(itemId && favs[itemId]);
+    }
+
+    function getFavoriteNote(itemId) {
+      const entry = getFavoritesMap()[itemId];
+      return entry && typeof entry.note === "string" ? entry.note : "";
+    }
+
+    function setFavorite(itemId, note) {
+      if (!itemId || !ITEM_BY_ID[itemId]) return;
+      const store = loadStore();
+      if (!store.favorites || typeof store.favorites !== "object") store.favorites = {};
+      const prev = store.favorites[itemId] || {};
+      store.favorites[itemId] = {
+        note: typeof note === "string" ? note.trim().slice(0, 120) : (prev.note || ""),
+        starredAt: prev.starredAt || Date.now()
+      };
+      saveStore(store);
+    }
+
+    function removeFavorite(itemId) {
+      const store = loadStore();
+      if (!store.favorites) return;
+      delete store.favorites[itemId];
+      saveStore(store);
+    }
+
+    function listFavoriteItems() {
+      const favs = getFavoritesMap();
+      const entries = Object.keys(favs)
+        .map(id => ({ id, item: ITEM_BY_ID[id], meta: favs[id] }))
+        .filter(e => e.item)
+        .sort((a, b) => (b.meta.starredAt || 0) - (a.meta.starredAt || 0));
+      return entries;
+    }
+
+    function updateFavoriteButton() {
+      const btn = $("btnFavorite");
+      const noteRow = $("favNoteRow");
+      if (!btn) return;
+      const item = currentItem();
+      if (!item || playMode === "home") {
+        btn.classList.add("hidden");
+        if (noteRow) noteRow.classList.add("hidden");
+        return;
+      }
+      btn.classList.remove("hidden");
+      const on = isFavorite(item.id);
+      btn.classList.toggle("on", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      btn.textContent = on ? "★ 已收藏" : "☆ 收藏";
+      if (noteRow && !noteRow.classList.contains("hidden") && $("favNoteInput")) {
+        // keep editor open only while editing same item
+      }
+    }
+
+    function openFavoriteNoteEditor(prefill) {
+      const item = currentItem();
+      if (!item) return;
+      const row = $("favNoteRow");
+      const input = $("favNoteInput");
+      if (!row || !input) return;
+      input.value = typeof prefill === "string" ? prefill : getFavoriteNote(item.id);
+      row.classList.remove("hidden");
+      try { input.focus(); } catch (_) {}
+    }
+
+    function closeFavoriteNoteEditor() {
+      const row = $("favNoteRow");
+      if (row) row.classList.add("hidden");
+    }
+
+    function renderFavoritesHome() {
+      const list = $("favoritesList");
+      const empty = $("favEmpty");
+      const badge = $("favCountBadge");
+      if (!list) return;
+      const entries = listFavoriteItems();
+      if (badge) badge.textContent = String(entries.length);
+      list.innerHTML = "";
+      if (!entries.length) {
+        if (empty) empty.classList.remove("hidden");
+        return;
+      }
+      if (empty) empty.classList.add("hidden");
+      entries.forEach(({ id, item, meta }) => {
+        const row = document.createElement("div");
+        row.className = "review-item";
+        row.style.cursor = "pointer";
+        const noteHtml = meta.note
+          ? '<div class="note" style="font-size:0.8rem;color:#8a6d3b;margin-top:2px;text-align:left">📝 ' +
+            escapeHtml(meta.note) + "</div>"
+          : "";
+        row.innerHTML =
+          '<img src="' + item.photo + '" alt="" />' +
+          '<div class="meta"><div class="jp">' + item.display +
+          ' <span style="font-weight:600;color:var(--muted);font-size:0.9rem">(' +
+          item.romaji + ')</span></div><div class="zh">' +
+          item.meaningZh + "</div>" + noteHtml + "</div>" +
+          '<div class="fav-actions">' +
+          '<button type="button" class="fav-mini" data-act="open">複習</button>' +
+          '<button type="button" class="fav-mini" data-act="unstar">取消☆</button>' +
+          "</div>";
+        row.addEventListener("click", (e) => {
+          const btn = e.target.closest("[data-act]");
+          if (btn && btn.getAttribute("data-act") === "unstar") {
+            e.stopPropagation();
+            if (confirm("取消收藏「" + item.display + "」？")) {
+              removeFavorite(id);
+              renderFavoritesHome();
+              updateFavoriteButton();
+            }
+            return;
+          }
+          unlockTTS();
+          startFavoriteReview(id);
+        });
+        list.appendChild(row);
+      });
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function startFavoriteReview(itemId) {
+      const item = ITEM_BY_ID[itemId];
+      if (!item) return;
+      startSession("review", [item], 0);
+      $("modeBadge").textContent = "收藏複習";
+      $("headerSub").textContent = "收藏複習・" + item.display;
+    }
+
+    /* ========== Visitor counter (static Pages) ========== */
+    const VISITOR_COUNTER_KEY = "sheng056_pixel_jp_kindergarten_voice_game_visits";
+    const VISITOR_HIT_URL = "https://countapi.mileshilliard.com/api/v1/hit/" + VISITOR_COUNTER_KEY;
+    const VISITOR_SESSION_FLAG = "jpKgVisitHit_v1";
+
+    function formatVisitCount(n) {
+      if (typeof n !== "number" || !isFinite(n) || n < 0) return null;
+      return Math.floor(n).toLocaleString("zh-TW");
+    }
+
+    function setVisitorDisplay(text) {
+      const el = $("visitorCount");
+      if (el) el.textContent = text;
+    }
+
+    async function bumpVisitorCounter() {
+      setVisitorDisplay("讀取中…");
+      let alreadyHit = false;
+      try {
+        alreadyHit = sessionStorage.getItem(VISITOR_SESSION_FLAG) === "1";
+      } catch (_) {}
+
+      const url = alreadyHit
+        ? ("https://countapi.mileshilliard.com/api/v1/get/" + VISITOR_COUNTER_KEY)
+        : VISITOR_HIT_URL;
+
+      try {
+        const ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+        const timer = ctrl ? setTimeout(() => ctrl.abort(), 6000) : null;
+        const res = await fetch(url, {
+          method: "GET",
+          mode: "cors",
+          cache: "no-store",
+          signal: ctrl ? ctrl.signal : undefined
+        });
+        if (timer) clearTimeout(timer);
+        if (!res.ok) throw new Error("counter http " + res.status);
+        const data = await res.json();
+        const raw = data && (data.value != null ? data.value : data.count);
+        const num = typeof raw === "string" ? parseInt(raw, 10) : Number(raw);
+        const formatted = formatVisitCount(num);
+        if (formatted == null) throw new Error("bad value");
+        setVisitorDisplay(formatted);
+        if (!alreadyHit) {
+          try { sessionStorage.setItem(VISITOR_SESSION_FLAG, "1"); } catch (_) {}
+        }
+      } catch (_) {
+        setVisitorDisplay("暫無法取得");
+      }
+    }
+
 
     function seededShuffle(arr, seedStr) {
       let seed = 0;
@@ -1445,6 +1829,8 @@
       if ($("reviewPreview") && !$("reviewPreview").classList.contains("hidden")) {
         $("reviewPreview").classList.add("hidden");
         $("homeCard").querySelector(".home-actions").classList.remove("hidden");
+        if ($("favoritesSection")) $("favoritesSection").classList.remove("hidden");
+        if ($("visitorStat")) $("visitorStat").classList.remove("hidden");
       }
       refreshHomeUI();
     }
@@ -1783,6 +2169,7 @@
       const item = currentItem();
       hideTeach();
       hideSentence();
+      closeFavoriteNoteEditor();
       answeredThisQ = false;
       scenePhoto(item);
       $("qLabel").textContent = "第 " + (index + 1) + " 題 / 共 " + order.length + " 題";
@@ -1791,6 +2178,7 @@
       setFeedback("提示：" + item.hintZh + "　請點選正確的日語！", "");
       renderProgress();
       buildChoices(item, choicesEl, onMainChoice);
+      updateFavoriteButton();
       if (speakPrompt) {
         speak("これは何ですか？", { rate: 0.95 });
       }
@@ -2053,6 +2441,9 @@
       $("headerSub").textContent = "幼稚園每日小測驗・看圖學日語";
       $("reviewPreview").classList.add("hidden");
       $("homeCard").querySelector(".home-actions").classList.remove("hidden");
+      if ($("favoritesSection")) $("favoritesSection").classList.remove("hidden");
+      if ($("visitorStat")) $("visitorStat").classList.remove("hidden");
+      closeFavoriteNoteEditor();
       refreshHomeUI();
     }
 
@@ -2105,6 +2496,7 @@
         btnStart.textContent = isToday ? "📝 開始今日測驗" : ("📝 開始 " + formatDateZh(key) + " 測驗");
         btnCont.classList.add("hidden");
       }
+      renderFavoritesHome();
     }
 
     function startSession(mode, items, startIndex) {
@@ -2184,6 +2576,8 @@
         list.appendChild(row);
       });
       $("homeCard").querySelector(".home-actions").classList.add("hidden");
+      if ($("favoritesSection")) $("favoritesSection").classList.add("hidden");
+      if ($("visitorStat")) $("visitorStat").classList.add("hidden");
       $("reviewPreview").classList.remove("hidden");
       $("btnStartReview").onclick = () => {
         startSession("review", items, 0);
@@ -2293,6 +2687,8 @@
     $("btnCloseReviewPreview").addEventListener("click", () => {
       $("reviewPreview").classList.add("hidden");
       $("homeCard").querySelector(".home-actions").classList.remove("hidden");
+      if ($("favoritesSection")) $("favoritesSection").classList.remove("hidden");
+      if ($("visitorStat")) $("visitorStat").classList.remove("hidden");
     });
     $("btnFreePlay").addEventListener("click", () => {
       unlockTTS();
@@ -2322,6 +2718,64 @@
     // Fix duplicate class on continue btn from markup
     $("btnContinueDaily").classList.add("hidden");
 
+    $("btnFavorite").addEventListener("click", () => {
+      unlockTTS();
+      const item = currentItem();
+      if (!item) return;
+      if (isFavorite(item.id)) {
+        // Already starred: open editor to edit note, or unstar via confirm if note empty
+        openFavoriteNoteEditor(getFavoriteNote(item.id));
+        return;
+      }
+      openFavoriteNoteEditor("");
+    });
+
+    $("btnFavNoteCancel").addEventListener("click", () => {
+      closeFavoriteNoteEditor();
+      // If user cancelled a brand-new star (not yet saved), leave unfavorited
+      updateFavoriteButton();
+    });
+
+    $("btnFavNoteSave").addEventListener("click", () => {
+      const item = currentItem();
+      if (!item) return;
+      const note = ($("favNoteInput") && $("favNoteInput").value) || "";
+      setFavorite(item.id, note);
+      closeFavoriteNoteEditor();
+      updateFavoriteButton();
+      renderFavoritesHome();
+      setFeedback("已收藏「" + item.display + "」⭐" + (note.trim() ? "（已存備註）" : ""), "ok");
+    });
+
+    // Long-press / second path: unstar from note editor when already favorited
+    // (cancel keeps favorite; use home list or save after clearing — also allow unstar here)
+    const favUnstarHint = document.createElement("button");
+    favUnstarHint.type = "button";
+    favUnstarHint.className = "btn-soft";
+    favUnstarHint.id = "btnFavUnstar";
+    favUnstarHint.textContent = "取消收藏";
+    favUnstarHint.style.flex = "1 1 120px";
+    favUnstarHint.style.minHeight = "44px";
+    const favActions = $("favNoteRow") && $("favNoteRow").querySelector(".fav-note-actions");
+    if (favActions) favActions.appendChild(favUnstarHint);
+    favUnstarHint.addEventListener("click", () => {
+      const item = currentItem();
+      if (!item) return;
+      if (!isFavorite(item.id)) {
+        closeFavoriteNoteEditor();
+        updateFavoriteButton();
+        return;
+      }
+      if (confirm("取消收藏「" + item.display + "」？")) {
+        removeFavorite(item.id);
+        closeFavoriteNoteEditor();
+        updateFavoriteButton();
+        renderFavoritesHome();
+        setFeedback("已取消收藏「" + item.display + "」", "");
+      }
+    });
+
+    bumpVisitorCounter();
     showHome();
   </script>
 </body>
