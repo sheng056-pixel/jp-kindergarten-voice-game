@@ -791,7 +791,7 @@
         </div>
       </div>
 
-      <p class="home-hint" id="homeStatusHint">每天固定 10 題，練完可複習錯題。</p>
+      <p class="home-hint" id="homeStatusHint">每天固定 10 題（看圖＋數數），練完可複習錯題。</p>
 
       <div class="home-actions">
         <button type="button" class="btn-primary" id="btnStartDaily">📝 開始今日測驗</button>
@@ -851,8 +851,8 @@
 
       <div class="scene" id="scene" aria-live="polite"></div>
 
-      <p class="prompt-jp">これは何ですか？</p>
-      <p class="prompt-zh">這是什麼呢？請點選正確答案</p>
+      <p class="prompt-jp" id="promptJp">これは何ですか？</p>
+      <p class="prompt-zh" id="promptZh">這是什麼呢？請點選正確答案</p>
 
       <div class="controls" style="margin-top:2px">
         <button type="button" class="btn-soft" id="btnAsk" style="flex:1 1 140px">🔊 再聽問題</button>
@@ -1587,12 +1587,155 @@
 
     ];
 
+    /* ========== Number questions (count objects / say number) ========== */
+    const NUMBER_ITEMS = [
+      {
+        id: "num-1-apple",
+        kind: "number",
+        count: 1,
+        display: "いち",
+        hiragana: "いち",
+        romaji: "ichi",
+        spoken: "いち",
+        slowSpoken: "い、ち。いち。",
+        meaningZh: "一（1個）",
+        hintZh: "數一數有幾個蘋果？",
+        sentence: "りんごがひとつあります。",
+        sentenceRomaji: "Ringo ga hitotsu arimasu.",
+        sentenceZh: "有一個蘋果。",
+        answers: ["いち", "イチ", "一", "1", "ひとつ", "一つ", "one", "ichi"],
+        photo: "images/count-1-apple.jpg"
+      },
+      {
+        id: "num-2-stars",
+        kind: "number",
+        count: 2,
+        display: "に",
+        hiragana: "に",
+        romaji: "ni",
+        spoken: "に",
+        slowSpoken: "に。に。",
+        meaningZh: "二（2個）",
+        hintZh: "數一數有幾顆星星？",
+        sentence: "ほしがふたつあります。",
+        sentenceRomaji: "Hoshi ga futatsu arimasu.",
+        sentenceZh: "有兩顆星星。",
+        answers: ["に", "ニ", "二", "2", "ふたつ", "二つ", "two", "ni"],
+        photo: "images/count-2-stars.jpg"
+      },
+      {
+        id: "num-3-apples",
+        kind: "number",
+        count: 3,
+        display: "さん",
+        hiragana: "さん",
+        romaji: "san",
+        spoken: "さん",
+        slowSpoken: "さ、ん。さん。",
+        meaningZh: "三（3個）",
+        hintZh: "數一數有幾個蘋果？",
+        sentence: "りんごがみっつあります。",
+        sentenceRomaji: "Ringo ga mittsu arimasu.",
+        sentenceZh: "有三個蘋果。",
+        answers: ["さん", "サン", "三", "3", "みっつ", "三つ", "three", "san"],
+        photo: "images/count-3-apples.jpg"
+      },
+      {
+        id: "num-4-balls",
+        kind: "number",
+        count: 4,
+        display: "よん",
+        hiragana: "よん",
+        romaji: "yon",
+        spoken: "よん",
+        slowSpoken: "よ、ん。よん。",
+        meaningZh: "四（4個）",
+        hintZh: "數一數有幾個球？",
+        sentence: "ボールがよっつあります。",
+        sentenceRomaji: "Bōru ga yottsu arimasu.",
+        sentenceZh: "有四個球。",
+        answers: ["よん", "ヨン", "し", "四", "4", "よっつ", "四つ", "four", "yon", "shi"],
+        photo: "images/count-4-balls.jpg"
+      },
+      {
+        id: "num-5-flowers",
+        kind: "number",
+        count: 5,
+        display: "ご",
+        hiragana: "ご",
+        romaji: "go",
+        spoken: "ご",
+        slowSpoken: "ご。ご。",
+        meaningZh: "五（5個）",
+        hintZh: "數一數有幾朵花？",
+        sentence: "はながいつつあります。",
+        sentenceRomaji: "Hana ga itsutsu arimasu.",
+        sentenceZh: "有五朵花。",
+        answers: ["ご", "ゴ", "五", "5", "いつつ", "五つ", "five", "go"],
+        photo: "images/count-5-flowers.jpg"
+      },
+      {
+        id: "num-6-fish",
+        kind: "number",
+        count: 6,
+        display: "ろく",
+        hiragana: "ろく",
+        romaji: "roku",
+        spoken: "ろく",
+        slowSpoken: "ろ、く。ろく。",
+        meaningZh: "六（6個）",
+        hintZh: "數一數有幾條魚？",
+        sentence: "さかながむっつあります。",
+        sentenceRomaji: "Sakana ga muttsu arimasu.",
+        sentenceZh: "有六條魚。",
+        answers: ["ろく", "ロク", "六", "6", "むっつ", "六つ", "six", "roku"],
+        photo: "images/count-6-fish.jpg"
+      },
+      {
+        id: "num-7-stars",
+        kind: "number",
+        count: 7,
+        display: "なな",
+        hiragana: "なな",
+        romaji: "nana",
+        spoken: "なな",
+        slowSpoken: "な、な。なな。",
+        meaningZh: "七（7個）",
+        hintZh: "數一數有幾顆星星？",
+        sentence: "ほしがななつあります。",
+        sentenceRomaji: "Hoshi ga nanatsu arimasu.",
+        sentenceZh: "有七顆星星。",
+        answers: ["なな", "ナナ", "しち", "七", "7", "ななつ", "七つ", "seven", "nana", "shichi"],
+        photo: "images/count-7-stars.jpg"
+      },
+      {
+        id: "num-8-balls",
+        kind: "number",
+        count: 8,
+        display: "はち",
+        hiragana: "はち",
+        romaji: "hachi",
+        spoken: "はち",
+        slowSpoken: "は、ち。はち。",
+        meaningZh: "八（8個）",
+        hintZh: "數一數有幾個球？",
+        sentence: "ボールがやっつあります。",
+        sentenceRomaji: "Bōru ga yattsu arimasu.",
+        sentenceZh: "有八個球。",
+        answers: ["はち", "ハチ", "八", "8", "やっつ", "八つ", "eight", "hachi"],
+        photo: "images/count-8-balls.jpg"
+      }
+    ];
 
-    const ITEM_BY_ID = Object.fromEntries(ITEMS.map(i => [i.id, i]));
+    const VOCAB_ITEMS = ITEMS;
+    const ALL_ITEMS = ITEMS.concat(NUMBER_ITEMS);
+    const ITEM_BY_ID = Object.fromEntries(ALL_ITEMS.map(i => [i.id, i]));
     const DAILY_COUNT = 10;
+    const DAILY_NUM_MIN = 2;
+    const DAILY_NUM_MAX = 3;
     const STORAGE_KEY = "jpKgDaily_v1";
     const EXAM_SIZE_VERSION = 2; // bumped when daily size changed 5 → 10
-    const QUESTION_BANK_VERSION = 3; // 2026-10-02 morning: +14 kindergarten vocab
+    const QUESTION_BANK_VERSION = 4; // 2026-10-02: +number bank; umbrella photo fix
     const ANCHOR_YESTERDAY = "2026-10-01";
     const ANCHOR_TODAY = "2026-10-02";
 
@@ -1947,9 +2090,34 @@
       return a;
     }
 
-    function dailyItemIds(dateKey) {
-      return seededShuffle(ITEMS.map(i => i.id), "daily-" + dateKey).slice(0, DAILY_COUNT);
+    function dailyNumCount(dateKey) {
+      // Date-seeded: 2 or 3 number questions (rest are vocab look-and-say)
+      const shuffled = seededShuffle(["2", "3"], "numcount-" + dateKey);
+      return Number(shuffled[0]);
     }
+
+    function dailyItemIds(dateKey) {
+      const numCount = Math.max(DAILY_NUM_MIN, Math.min(DAILY_NUM_MAX, dailyNumCount(dateKey)));
+      const vocabCount = DAILY_COUNT - numCount;
+      const vocabIds = seededShuffle(VOCAB_ITEMS.map(i => i.id), "vocab-" + dateKey).slice(0, vocabCount);
+      const numIds = seededShuffle(NUMBER_ITEMS.map(i => i.id), "num-" + dateKey).slice(0, numCount);
+      return seededShuffle(vocabIds.concat(numIds), "mix-" + dateKey);
+    }
+
+    function isNumberItem(item) {
+      return !!(item && item.kind === "number");
+    }
+
+    function questionPromptJp(item) {
+      return isNumberItem(item) ? "いくつありますか？" : "これは何ですか？";
+    }
+
+    function questionPromptZh(item) {
+      return isNumberItem(item)
+        ? "有幾個呢？請點選正確的數字"
+        : "這是什麼呢？請點選正確答案";
+    }
+
 
     function ensureDayRecord(store, dateKey) {
       const key = dateKey || todayKey();
@@ -2246,7 +2414,8 @@
 
     function buildChoices(correctItem, container, onPick) {
       container.innerHTML = "";
-      const distractors = shuffle(ITEMS.filter(x => x.id !== correctItem.id)).slice(0, 3);
+      const pool = isNumberItem(correctItem) ? NUMBER_ITEMS : VOCAB_ITEMS;
+      const distractors = shuffle(pool.filter(x => x.id !== correctItem.id)).slice(0, 3);
       const opts = shuffle([correctItem, ...distractors]);
       opts.forEach((opt) => {
         const btn = document.createElement("button");
@@ -2404,12 +2573,19 @@
       $("qLabel").textContent = "第 " + (index + 1) + " 題 / 共 " + order.length + " 題";
       $("scoreLabel").textContent = "得分 " + score;
       textAnswer.value = "";
-      setFeedback("提示：" + item.hintZh + "　請點選正確的日語！", "");
+      if ($("promptJp")) $("promptJp").textContent = questionPromptJp(item);
+      if ($("promptZh")) $("promptZh").textContent = questionPromptZh(item);
+      setFeedback(
+        isNumberItem(item)
+          ? ("提示：" + item.hintZh + "　請點選正確的數字！")
+          : ("提示：" + item.hintZh + "　請點選正確的日語！"),
+        ""
+      );
       renderProgress();
       buildChoices(item, choicesEl, onMainChoice);
       updateFavoriteButton();
       if (speakPrompt) {
-        speak("これは何ですか？", { rate: 0.95 });
+        speak(questionPromptJp(item), { rate: 0.95 });
       }
     }
 
@@ -2719,7 +2895,7 @@
         btnCont.textContent = "▶️ 繼續" + dayLabel + "測驗（剩餘 " + (total - done) + " 題）";
       } else {
         $("homeStatusHint").textContent = isToday
-          ? ("每天固定 " + DAILY_COUNT + " 題（依日期產生），練完可複習錯題。可切換日期查看過去進度。")
+          ? ("每天固定 " + DAILY_COUNT + " 題（約7–8題看圖說名稱＋2–3題數數），依日期產生。練完可複習錯題。")
           : (formatDateZh(key) + " 尚未作答。可開始該日測驗，或重考／複習。");
         btnStart.classList.remove("hidden");
         btnStart.textContent = isToday ? "📝 開始今日測驗" : ("📝 開始 " + formatDateZh(key) + " 測驗");
@@ -2816,7 +2992,8 @@
     /* ========== Events ========== */
     $("btnAsk").addEventListener("click", () => {
       unlockTTS();
-      speak("これは何ですか？", { rate: 0.95 });
+      const item = currentItem();
+      speak(questionPromptJp(item), { rate: 0.95 });
     });
 
     $("btnMic").addEventListener("click", () => {
@@ -2887,7 +3064,7 @@
       unlockTTS();
       if (playMode === "daily") startDaily(true);
       else if (playMode === "review") startSession("review", collectReviewItems(), 0);
-      else startSession("practice", shuffle(ITEMS), 0);
+      else startSession("practice", shuffle(ALL_ITEMS), 0);
     });
 
     $("btnEndHome").addEventListener("click", () => {
@@ -2921,7 +3098,7 @@
     });
     $("btnFreePlay").addEventListener("click", () => {
       unlockTTS();
-      startSession("practice", shuffle(ITEMS), 0);
+      startSession("practice", shuffle(ALL_ITEMS), 0);
     });
 
     $("btnPrevDay").addEventListener("click", () => {
