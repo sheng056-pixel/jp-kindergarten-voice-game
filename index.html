@@ -1,0 +1,2328 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="theme-color" content="#fff8ef" />
+  <title>日語看圖說名稱｜幼稚園小遊戲</title>
+  <style>
+    :root {
+      --bg: #fff8ef;
+      --card: #ffffff;
+      --primary: #ff8a5c;
+      --primary-dark: #e56f40;
+      --accent: #5ec8c0;
+      --accent-dark: #3eaea6;
+      --good: #4caf50;
+      --good-dark: #3d9c40;
+      --warn: #ffb74d;
+      --text: #3d2c29;
+      --muted: #7a6a66;
+      --choice: #fff3e8;
+      --choice-border: #ffd2b0;
+      --shadow: 0 10px 30px rgba(61, 44, 41, 0.12);
+      --radius: 24px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --touch-min: 52px;
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      min-height: 100dvh;
+    }
+
+    body {
+      font-family: "Noto Sans TC", "PingFang TC", "Hiragino Sans", "Microsoft JhengHei", sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, #ffe0c2 0, transparent 40%),
+        radial-gradient(circle at 90% 20%, #c9f3ef 0, transparent 35%),
+        radial-gradient(circle at 50% 100%, #ffd6e7 0, transparent 40%),
+        var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding:
+        max(12px, var(--safe-top))
+        max(14px, var(--safe-right))
+        max(20px, calc(14px + var(--safe-bottom)))
+        max(14px, var(--safe-left));
+      touch-action: manipulation;
+    }
+
+    .app {
+      width: min(560px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    header {
+      text-align: center;
+      padding: 4px 4px 0;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(1.25rem, 5vw, 1.85rem);
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+
+    header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+    .top-bar .btn-home {
+      min-height: 44px;
+      padding: 8px 14px;
+      font-size: 0.92rem;
+      box-shadow: 0 3px 0 rgba(0,0,0,0.08);
+    }
+
+    .progress {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 2px 0;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #e8d7cf;
+      transition: 0.25s ease;
+    }
+    .dot.done { background: var(--good); }
+    .dot.current { background: var(--primary); transform: scale(1.3); }
+    .dot.wrong-dot { background: #ef9a9a; }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .scorebar {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .scene {
+      width: min(100%, 280px);
+      aspect-ratio: 1;
+      border-radius: 24px;
+      background: linear-gradient(160deg, #fff3e0, #e8f8f6);
+      border: 4px solid #ffe0c8;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scene img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    .prompt-jp {
+      font-size: clamp(1.2rem, 4.5vw, 1.65rem);
+      font-weight: 700;
+      margin: 0;
+      text-align: center;
+    }
+
+    .prompt-zh {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .choice-btn {
+      appearance: none;
+      border: 3px solid var(--choice-border);
+      border-radius: 18px;
+      min-height: var(--touch-min);
+      padding: 14px 10px;
+      font-size: clamp(1.15rem, 4.5vw, 1.45rem);
+      font-weight: 800;
+      font-family: inherit;
+      background: var(--choice);
+      color: var(--text);
+      cursor: pointer;
+      box-shadow: 0 5px 0 rgba(0,0,0,0.07);
+      transition: transform 0.12s ease, box-shadow 0.12s, background 0.15s, border-color 0.15s;
+      line-height: 1.2;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .choice-btn:active:not(:disabled) {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.07);
+    }
+    .choice-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+    .choice-btn.correct {
+      background: #e8f8ec;
+      border-color: var(--good);
+      color: #1b5e20;
+    }
+    .choice-btn.wrong {
+      background: #ffebee;
+      border-color: #ef9a9a;
+      color: #b71c1c;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    button {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      min-height: var(--touch-min);
+      padding: 12px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s, background 0.15s;
+      box-shadow: 0 5px 0 rgba(0,0,0,0.08);
+      font-family: inherit;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    button:active:not(:disabled) {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+    }
+    button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
+    .btn-accent { background: var(--accent); color: white; }
+    .btn-accent:hover:not(:disabled) { background: var(--accent-dark); }
+    .btn-soft { background: #ffe8d6; color: var(--text); }
+    .btn-soft:hover:not(:disabled) { background: #ffd7b8; }
+    .btn-good { background: var(--good); color: white; }
+    .btn-good:hover:not(:disabled) { background: var(--good-dark); }
+    .btn-mic.listening {
+      background: #ff5252;
+      color: white;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,82,82,0.5); }
+      50% { box-shadow: 0 0 0 14px rgba(255,82,82,0); }
+    }
+
+    .secondary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .secondary-row button {
+      flex: 1 1 auto;
+      min-width: 120px;
+    }
+
+    .mic-note {
+      width: 100%;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    details.fallback-details {
+      width: 100%;
+      border-radius: 14px;
+      background: #fffaf5;
+      border: 1px dashed #efd5c5;
+      padding: 4px 10px;
+    }
+    details.fallback-details summary {
+      cursor: pointer;
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 600;
+      padding: 10px 4px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
+    details.fallback-details summary::-webkit-details-marker { display: none; }
+    details.fallback-details summary::before {
+      content: "▸ ";
+      color: var(--primary);
+    }
+    details.fallback-details[open] summary::before { content: "▾ "; }
+
+    .fallback {
+      width: 100%;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      padding-bottom: 8px;
+    }
+
+    .fallback input {
+      flex: 1 1 140px;
+      min-width: 0;
+      min-height: var(--touch-min);
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 2px solid #efd5c5;
+      font-size: 1.05rem;
+      font-family: inherit;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .fallback input:focus { border-color: var(--primary); }
+
+    .feedback {
+      min-height: 56px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 12px 14px;
+      text-align: center;
+      background: #fff6ee;
+      border: 2px dashed #ffd2b0;
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    .feedback.ok { background: #e8f8ec; border-color: #a5d6a7; }
+    .feedback.bad { background: #fff3e0; border-color: #ffcc80; }
+    .feedback.teach { background: #e3f2fd; border-color: #90caf9; }
+
+    .teach-box {
+      display: none;
+      width: 100%;
+      text-align: center;
+      background: #eef9ff;
+      border-radius: 18px;
+      padding: 14px;
+      border: 2px solid #b3e5fc;
+      gap: 6px;
+      flex-direction: column;
+      align-items: center;
+    }
+    .teach-box.show { display: flex; }
+
+    .sentence-box {
+      display: none;
+      width: 100%;
+      text-align: center;
+      background: #e8f8ec;
+      border-radius: 18px;
+      padding: 14px;
+      border: 2px solid #a5d6a7;
+      gap: 6px;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sentence-box.show { display: flex; }
+    .sentence-jp {
+      font-size: clamp(1.25rem, 5vw, 1.75rem);
+      font-weight: 800;
+      color: #1b5e20;
+      margin: 4px 0;
+      line-height: 1.35;
+    }
+    .sentence-romaji {
+      font-size: 0.98rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin: 0;
+      font-weight: 600;
+    }
+    .sentence-zh {
+      font-size: 1rem;
+      color: var(--muted);
+      margin: 0;
+    }
+    .sentence-invite {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin: 4px 0 2px;
+      font-weight: 600;
+    }
+
+    .word-big {
+      font-size: clamp(1.7rem, 7vw, 2.5rem);
+      font-weight: 800;
+      color: #1565c0;
+      margin: 4px 0;
+    }
+    .furi { font-size: 1.1rem; color: #0277bd; }
+    .romaji { font-size: 0.98rem; color: var(--muted); letter-spacing: 0.04em; }
+    .meaning { font-size: 1.05rem; color: var(--text); margin-top: 4px; }
+
+    .note {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .hidden { display: none !important; }
+
+    .end-screen {
+      text-align: center;
+      padding: 24px 8px;
+    }
+    .end-screen h2 { margin: 0 0 8px; font-size: 1.65rem; }
+    .stars { font-size: 2.2rem; letter-spacing: 4px; }
+    .end-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      width: 100%;
+      margin-top: 8px;
+    }
+    .end-actions button { min-width: 140px; flex: 1 1 140px; }
+
+    /* Home screen */
+    .home-hero {
+      width: 100%;
+      text-align: center;
+      padding: 8px 4px 0;
+    }
+    .home-hero .emoji-row {
+      font-size: 2rem;
+      letter-spacing: 4px;
+      margin-bottom: 4px;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+    .stat {
+      background: #fff6ee;
+      border: 2px solid #ffe0c8;
+      border-radius: 18px;
+      padding: 14px 10px;
+      text-align: center;
+    }
+    .stat .num {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.1;
+    }
+    .stat .label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+    .date-chip {
+      display: inline-block;
+      background: #e8f8f6;
+      border: 2px solid #b2e5e0;
+      color: #2a7a74;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+    .date-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin-top: 2px;
+    }
+    .date-nav-btn {
+      width: 44px;
+      min-width: 44px;
+      height: 44px;
+      padding: 0;
+      border-radius: 14px;
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .date-nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .date-chip-wrap {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+    }
+    .date-chip-wrap .date-chip {
+      cursor: pointer;
+      user-select: none;
+    }
+    .date-picker {
+      border: 2px solid #ffe0c8;
+      background: #fffaf5;
+      border-radius: 12px;
+      padding: 4px 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      color-scheme: light;
+      max-width: 160px;
+    }
+    .date-picker:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 1px;
+    }
+    .date-nav-hint {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin: 0;
+    }
+    .home-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+    .home-actions button {
+      width: 100%;
+      font-size: 1.08rem;
+    }
+    .home-hint {
+      font-size: 0.88rem;
+      color: var(--muted);
+      text-align: center;
+      margin: 0;
+      line-height: 1.45;
+    }
+    .review-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 220px;
+      overflow: auto;
+    }
+    .review-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: #fffaf5;
+      border: 1px solid #efd5c5;
+    }
+    .review-item img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .review-item .meta { flex: 1; text-align: left; }
+    .review-item .jp { font-weight: 800; font-size: 1.05rem; }
+    .review-item .zh { font-size: 0.85rem; color: var(--muted); }
+
+    @media (max-width: 380px) {
+      .choices { grid-template-columns: 1fr; }
+      .choice-btn { font-size: 1.25rem; padding: 16px 12px; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 14px; }
+      .secondary-row button { width: 100%; }
+      .fallback { flex-direction: column; }
+      .fallback input, .fallback button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>🍎 日語看圖說名稱</h1>
+      <p id="headerSub">幼稚園每日小測驗・看圖學日語</p>
+    </header>
+
+    <!-- ========== HOME ========== -->
+    <section class="card" id="homeCard">
+      <div class="home-hero">
+        <div class="emoji-row">🚌 🍎 🐱 🐶</div>
+        <div class="date-nav" id="dateNav">
+          <button type="button" class="btn-soft date-nav-btn" id="btnPrevDay" aria-label="前一天">‹</button>
+          <div class="date-chip-wrap">
+            <div class="date-chip" id="homeDateChip" title="點一下可選日期">今日</div>
+            <input type="date" id="homeDatePicker" class="date-picker" aria-label="選擇日期" />
+            <p class="date-nav-hint" id="dateNavHint">可切換日期查看／重考過去測驗</p>
+          </div>
+          <button type="button" class="btn-soft date-nav-btn" id="btnNextDay" aria-label="後一天">›</button>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="num" id="homeProgressNum">0/10</div>
+          <div class="label" id="homeProgressLabel">今日進度</div>
+        </div>
+        <div class="stat">
+          <div class="num" id="homeStreakNum">0</div>
+          <div class="label">連續天數 🔥</div>
+        </div>
+      </div>
+
+      <p class="home-hint" id="homeStatusHint">每天固定 10 題，練完可複習錯題。</p>
+
+      <div class="home-actions">
+        <button type="button" class="btn-primary" id="btnStartDaily">📝 開始今日測驗</button>
+        <button type="button" class="btn-accent hidden" id="btnContinueDaily">▶️ 繼續今日測驗</button>
+        <button type="button" class="btn-soft" id="btnRetakeDaily">🔄 重考今日（重新開始）</button>
+        <button type="button" class="btn-soft" id="btnReviewWrong">📚 複習錯題 / 過去單字</button>
+        <button type="button" class="btn-good" id="btnFreePlay">🎮 自由練習（全部）</button>
+      </div>
+
+      <div id="reviewPreview" class="hidden" style="width:100%">
+        <p class="home-hint" style="margin-bottom:6px;font-weight:700;color:var(--text)">最近錯題／可複習：</p>
+        <div class="review-list" id="reviewList"></div>
+        <div class="home-actions" style="margin-top:10px">
+          <button type="button" class="btn-primary" id="btnStartReview">開始複習這些單字</button>
+          <button type="button" class="btn-soft" id="btnCloseReviewPreview">返回選單</button>
+        </div>
+      </div>
+
+      <p class="note">主要用「點選答案」遊玩，適合 iPhone Safari。可聽日語發音；語音辨識為選用。</p>
+    </section>
+
+    <div class="progress hidden" id="progress" aria-label="進度"></div>
+
+    <section class="card hidden" id="gameCard">
+      <div class="top-bar">
+        <button type="button" class="btn-soft btn-home" id="btnBackHome">← 回首頁</button>
+        <span id="modeBadge" style="font-size:0.85rem;font-weight:700;color:var(--muted)">今日測驗</span>
+      </div>
+
+      <div class="scorebar">
+        <span id="qLabel">第 1 題</span>
+        <span id="scoreLabel">得分 0</span>
+      </div>
+
+      <div class="scene" id="scene" aria-live="polite"></div>
+
+      <p class="prompt-jp">これは何ですか？</p>
+      <p class="prompt-zh">這是什麼呢？請點選正確答案</p>
+
+      <div class="controls" style="margin-top:2px">
+        <button type="button" class="btn-soft" id="btnAsk" style="flex:1 1 140px">🔊 再聽問題</button>
+        <button type="button" class="btn-accent" id="btnIdk" style="flex:1 1 140px">🤔 我不知道</button>
+      </div>
+
+      <div class="choices" id="choices" role="group" aria-label="選項"></div>
+
+      <div class="secondary-row" id="micRow">
+        <button type="button" class="btn-primary btn-mic" id="btnMic">🎤 用語音回答</button>
+      </div>
+      <p class="mic-note hidden" id="micNote">此裝置／Safari 不支援語音辨識，請用上方選項作答（仍可聽日語發音）。</p>
+
+      <details class="fallback-details" id="textDetails">
+        <summary>✏️ 文字輸入（備用）</summary>
+        <div class="fallback">
+          <input id="textAnswer" type="text" enterkeyhint="done" placeholder="例如：バス、りんご" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          <button type="button" class="btn-soft" id="btnTextSubmit">送出文字</button>
+        </div>
+      </details>
+
+      <div class="feedback" id="feedback">點選正確的日語單字，或按「再聽問題」。</div>
+
+      <div class="teach-box" id="teachBox">
+        <div class="word-big" id="teachWord"></div>
+        <div class="furi" id="teachFuri"></div>
+        <div class="romaji" id="teachRomaji"></div>
+        <div class="meaning" id="teachMeaning"></div>
+        <p class="note" id="teachHint">先聽清楚，再點選練習或再聽一次！</p>
+        <div class="controls">
+          <button type="button" class="btn-soft" id="btnReplayWord" style="flex:1 1 140px">🔊 再聽一次單字</button>
+          <button type="button" class="btn-primary hidden" id="btnTrySay" style="flex:1 1 140px">🎤 我來試試看</button>
+          <button type="button" class="btn-good hidden" id="btnContinue" style="flex:1 1 140px">下一個 →</button>
+        </div>
+        <div class="choices" id="practiceChoices" style="margin-top:6px"></div>
+      </div>
+
+      <div class="sentence-box" id="sentenceBox">
+        <div class="sentence-jp" id="sentenceJp"></div>
+        <p class="sentence-romaji" id="sentenceRomaji"></p>
+        <p class="sentence-zh" id="sentenceZh"></p>
+        <p class="sentence-invite" id="sentenceInvite">跟著說一次吧！（影子跟讀）</p>
+        <div class="controls">
+          <button type="button" class="btn-soft" id="btnReplaySentence" style="flex:1 1 140px">🔊 再聽句子</button>
+          <button type="button" class="btn-primary hidden" id="btnShadowSay" style="flex:1 1 140px">🎤 我來跟讀</button>
+          <button type="button" class="btn-good" id="btnSentenceContinue" style="flex:1 1 140px">下一個 →</button>
+        </div>
+      </div>
+
+      <p class="note" id="compatNote">
+        主要用「點選答案」遊玩，適合 iPhone Safari。語音朗讀可用；語音辨識為選用功能。
+      </p>
+    </section>
+
+    <section class="card end-screen hidden" id="endCard">
+      <div class="stars">⭐⭐⭐</div>
+      <h2 id="endTitle">全部完成！おめでとう！</h2>
+      <p id="endSummary"></p>
+      <div class="end-actions">
+        <button type="button" class="btn-primary" id="btnRestart">再玩一次</button>
+        <button type="button" class="btn-soft" id="btnEndHome">回首頁</button>
+        <button type="button" class="btn-accent hidden" id="btnEndReview">複習錯題</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+
+    /* ========== Vocabulary (kindergarten JP) ========== */
+    const ITEMS = [
+      {
+        id: "bus",
+        display: "バス",
+        hiragana: "ばす",
+        romaji: "basu",
+        spoken: "バス",
+        slowSpoken: "ば、す。バス。",
+        meaningZh: "公車／校車（巴士）",
+        hintZh: "黃色的校車～",
+        sentence: "これはスクールバスです。",
+        sentenceRomaji: "Kore wa sukūru basu desu.",
+        sentenceZh: "這是校車。",
+        answers: ["バス", "ばす", "ばすう", "スクールバス", "すくーるばす", "校車", "こうしゃ", "ばすです", "バスです", "school bus", "bus"],
+        photo: "images/bus.jpg"
+      },
+      {
+        id: "apple",
+        display: "りんご",
+        hiragana: "りんご",
+        romaji: "ringo",
+        spoken: "りんご",
+        slowSpoken: "り、ん、ご。りんご。",
+        meaningZh: "蘋果",
+        hintZh: "紅紅圓圓的水果",
+        sentence: "あかいりんごです。",
+        sentenceRomaji: "Akai ringo desu.",
+        sentenceZh: "這是紅蘋果。",
+        answers: ["りんご", "リンゴ", "林檎", "りんごです", "リンゴです", "あっぷる", "アップル", "apple", "ringo"],
+        photo: "images/apple.jpg"
+      },
+      {
+        id: "cat",
+        display: "ねこ",
+        hiragana: "ねこ",
+        romaji: "neko",
+        spoken: "ねこ",
+        slowSpoken: "ね、こ。ねこ。",
+        meaningZh: "貓",
+        hintZh: "喵喵叫的小動物",
+        sentence: "ねこがいます。",
+        sentenceRomaji: "Neko ga imasu.",
+        sentenceZh: "有一隻貓。",
+        answers: ["ねこ", "ネコ", "猫", "ねこです", "ネコです", "にゃー", "にゃんこ", "cat", "neko"],
+        photo: "images/cat.jpg"
+      },
+      {
+        id: "dog",
+        display: "いぬ",
+        hiragana: "いぬ",
+        romaji: "inu",
+        spoken: "いぬ",
+        slowSpoken: "い、ぬ。いぬ。",
+        meaningZh: "狗",
+        hintZh: "汪汪叫的好朋友",
+        sentence: "いぬがいます。",
+        sentenceRomaji: "Inu ga imasu.",
+        sentenceZh: "有一隻狗。",
+        answers: ["いぬ", "イヌ", "犬", "いぬです", "イヌです", "わんわん", "dog", "inu"],
+        photo: "images/dog.jpg"
+      },
+      {
+        id: "car",
+        display: "くるま",
+        hiragana: "くるま",
+        romaji: "kuruma",
+        spoken: "くるま",
+        slowSpoken: "く、る、ま。くるま。",
+        meaningZh: "汽車／車子",
+        hintZh: "可以載人到處跑",
+        sentence: "くるまがはしっています。",
+        sentenceRomaji: "Kuruma ga hashitte imasu.",
+        sentenceZh: "車子在跑。",
+        answers: ["くるま", "クルマ", "車", "くるまです", "自動車", "じどうしゃ", "カー", "かー", "car", "kuruma"],
+        photo: "images/car.jpg"
+      },
+      {
+        id: "flower",
+        display: "はな",
+        hiragana: "はな",
+        romaji: "hana",
+        spoken: "はな",
+        slowSpoken: "は、な。はな。",
+        meaningZh: "花",
+        hintZh: "漂亮的小花",
+        sentence: "きれいなはなです。",
+        sentenceRomaji: "Kirei na hana desu.",
+        sentenceZh: "這是漂亮的花。",
+        answers: ["はな", "ハナ", "花", "はなです", "お花", "おはな", "フラワー", "flower", "hana"],
+        photo: "images/flower.jpg"
+      },
+      {
+        id: "ball",
+        display: "ボール",
+        hiragana: "ぼーる",
+        romaji: "bōru",
+        spoken: "ボール",
+        slowSpoken: "ぼー、る。ボール。",
+        meaningZh: "球",
+        hintZh: "可以丟、可以踢",
+        sentence: "ボールであそびます。",
+        sentenceRomaji: "Bōru de asobimasu.",
+        sentenceZh: "用球來玩。",
+        answers: ["ボール", "ぼーる", "ボールです", "ぼーるです", "球", "たま", "ボール遊び", "ball", "boru", "booru"],
+        photo: "images/ball.jpg"
+      },
+      {
+        id: "pencil",
+        display: "えんぴつ",
+        hiragana: "えんぴつ",
+        romaji: "enpitsu",
+        spoken: "えんぴつ",
+        slowSpoken: "え、ん、ぴ、つ。えんぴつ。",
+        meaningZh: "鉛筆",
+        hintZh: "用來寫字畫畫",
+        sentence: "えんぴつでかきます。",
+        sentenceRomaji: "Enpitsu de kakimasu.",
+        sentenceZh: "用鉛筆寫字。",
+        answers: ["えんぴつ", "エンピツ", "鉛筆", "えんぴつです", "ペンシル", "pencil", "enpitsu"],
+        photo: "images/pencil.jpg"
+      },
+      {
+        id: "fish",
+        display: "さかな",
+        hiragana: "さかな",
+        romaji: "sakana",
+        spoken: "さかな",
+        slowSpoken: "さ、か、な。さかな。",
+        meaningZh: "魚",
+        hintZh: "在水裡游的動物",
+        sentence: "さかながおよいでいます。",
+        sentenceRomaji: "Sakana ga oyoide imasu.",
+        sentenceZh: "魚在游泳。",
+        answers: ["さかな", "サカナ", "魚", "さかなです", "お魚", "おさかな", "フィッシュ", "fish", "sakana"],
+        photo: "images/fish.jpg"
+      },
+      {
+        id: "bird",
+        display: "とり",
+        hiragana: "とり",
+        romaji: "tori",
+        spoken: "とり",
+        slowSpoken: "と、り。とり。",
+        meaningZh: "鳥",
+        hintZh: "會飛的小動物",
+        sentence: "とりがとんでいます。",
+        sentenceRomaji: "Tori ga tonde imasu.",
+        sentenceZh: "鳥在飛。",
+        answers: ["とり", "トリ", "鳥", "とりです", "お鳥", "バード", "bird", "tori"],
+        photo: "images/bird.jpg"
+      },
+      {
+        id: "banana",
+        display: "バナナ",
+        hiragana: "ばなな",
+        romaji: "banana",
+        spoken: "バナナ",
+        slowSpoken: "ば、な、な。バナナ。",
+        meaningZh: "香蕉",
+        hintZh: "彎彎黃黃的水果",
+        sentence: "バナナをたべます。",
+        sentenceRomaji: "Banana o tabemasu.",
+        sentenceZh: "吃香蕉。",
+        answers: ["バナナ", "ばなな", "バナナです", "ばななです", "banana"],
+        photo: "images/banana.jpg"
+      },
+      {
+        id: "strawberry",
+        display: "いちご",
+        hiragana: "いちご",
+        romaji: "ichigo",
+        spoken: "いちご",
+        slowSpoken: "い、ち、ご。いちご。",
+        meaningZh: "草莓",
+        hintZh: "紅紅甜甜的小水果",
+        sentence: "あかいいちごです。",
+        sentenceRomaji: "Akai ichigo desu.",
+        sentenceZh: "這是紅草莓。",
+        answers: ["いちご", "イチゴ", "苺", "いちごです", "ストロベリー", "strawberry", "ichigo"],
+        photo: "images/strawberry.jpg"
+      },
+      {
+        id: "book",
+        display: "ほん",
+        hiragana: "ほん",
+        romaji: "hon",
+        spoken: "ほん",
+        slowSpoken: "ほ、ん。ほん。",
+        meaningZh: "書",
+        hintZh: "可以讀的故事書",
+        sentence: "ほんをよみます。",
+        sentenceRomaji: "Hon o yomimasu.",
+        sentenceZh: "讀書。",
+        answers: ["ほん", "ホン", "本", "ほんです", "ブック", "book", "hon"],
+        photo: "images/book.jpg"
+      },
+      {
+        id: "chair",
+        display: "いす",
+        hiragana: "いす",
+        romaji: "isu",
+        spoken: "いす",
+        slowSpoken: "い、す。いす。",
+        meaningZh: "椅子",
+        hintZh: "用來坐的家具",
+        sentence: "いすにすわります。",
+        sentenceRomaji: "Isu ni suwarimasu.",
+        sentenceZh: "坐在椅子上。",
+        answers: ["いす", "イス", "椅子", "いすです", "チェア", "chair", "isu"],
+        photo: "images/chair.jpg"
+      },
+      {
+        id: "desk",
+        display: "つくえ",
+        hiragana: "つくえ",
+        romaji: "tsukue",
+        spoken: "つくえ",
+        slowSpoken: "つ、く、え。つくえ。",
+        meaningZh: "桌子／書桌",
+        hintZh: "寫功課用的桌子",
+        sentence: "つくえのうえにほんがあります。",
+        sentenceRomaji: "Tsukue no ue ni hon ga arimasu.",
+        sentenceZh: "桌子上有書。",
+        answers: ["つくえ", "ツクエ", "机", "つくえです", "デスク", "テーブル", "desk", "table", "tsukue"],
+        photo: "images/desk.jpg"
+      },
+      {
+        id: "water",
+        display: "みず",
+        hiragana: "みず",
+        romaji: "mizu",
+        spoken: "みず",
+        slowSpoken: "み、ず。みず。",
+        meaningZh: "水",
+        hintZh: "清清涼涼可以喝",
+        sentence: "みずをのみます。",
+        sentenceRomaji: "Mizu o nomimasu.",
+        sentenceZh: "喝水。",
+        answers: ["みず", "ミズ", "水", "みずです", "ウォーター", "water", "mizu"],
+        photo: "images/water.jpg"
+      },
+      {
+        id: "milk",
+        display: "ミルク",
+        hiragana: "みるく",
+        romaji: "miruku",
+        spoken: "ミルク",
+        slowSpoken: "み、る、く。ミルク。",
+        meaningZh: "牛奶",
+        hintZh: "白色香香的飲料",
+        sentence: "ミルクをのみます。",
+        sentenceRomaji: "Miruku o nomimasu.",
+        sentenceZh: "喝牛奶。",
+        answers: ["ミルク", "みるく", "牛乳", "ぎゅうにゅう", "ミルクです", "みるくです", "milk", "miruku"],
+        photo: "images/milk.jpg"
+      },
+      {
+        id: "egg",
+        display: "たまご",
+        hiragana: "たまご",
+        romaji: "tamago",
+        spoken: "たまご",
+        slowSpoken: "た、ま、ご。たまご。",
+        meaningZh: "蛋／雞蛋",
+        hintZh: "圓圓可以煎來吃",
+        sentence: "たまごをたべます。",
+        sentenceRomaji: "Tamago o tabemasu.",
+        sentenceZh: "吃蛋。",
+        answers: ["たまご", "タマゴ", "卵", "たまごです", "エッグ", "egg", "tamago"],
+        photo: "images/egg.jpg"
+      },
+      {
+        id: "bread",
+        display: "パン",
+        hiragana: "ぱん",
+        romaji: "pan",
+        spoken: "パン",
+        slowSpoken: "ぱ、ん。パン。",
+        meaningZh: "麵包",
+        hintZh: "早餐常吃的食物",
+        sentence: "パンをたべます。",
+        sentenceRomaji: "Pan o tabemasu.",
+        sentenceZh: "吃麵包。",
+        answers: ["パン", "ぱん", "パンです", "ぱんです", "麵包", "面包", "bread", "pan"],
+        photo: "images/bread.jpg"
+      },
+      {
+        id: "sun",
+        display: "たいよう",
+        hiragana: "たいよう",
+        romaji: "taiyō",
+        spoken: "たいよう",
+        slowSpoken: "た、い、よ、う。たいよう。",
+        meaningZh: "太陽",
+        hintZh: "白天亮亮熱熱的",
+        sentence: "たいようがてっています。",
+        sentenceRomaji: "Taiyō ga tette imasu.",
+        sentenceZh: "太陽照耀著。",
+        answers: ["たいよう", "タイヨウ", "太陽", "たいようです", "お日さま", "おひさま", "サン", "sun", "taiyou", "taiyo"],
+        photo: "images/sun.jpg"
+      },
+      {
+        id: "moon",
+        display: "つき",
+        hiragana: "つき",
+        romaji: "tsuki",
+        spoken: "つき",
+        slowSpoken: "つ、き。つき。",
+        meaningZh: "月亮",
+        hintZh: "晚上天空亮亮的",
+        sentence: "おつきさまがきれいです。",
+        sentenceRomaji: "Otsukisama ga kirei desu.",
+        sentenceZh: "月亮好漂亮。",
+        answers: ["つき", "ツキ", "月", "つきです", "お月さま", "おつきさま", "ムーン", "moon", "tsuki"],
+        photo: "images/moon.jpg"
+      },
+      {
+        id: "tree",
+        display: "き",
+        hiragana: "き",
+        romaji: "ki",
+        spoken: "き",
+        slowSpoken: "き。き。",
+        meaningZh: "樹",
+        hintZh: "又高又綠的大樹",
+        sentence: "おおきなきです。",
+        sentenceRomaji: "Ōkina ki desu.",
+        sentenceZh: "這是一棵大樹。",
+        answers: ["き", "キ", "木", "きです", "ツリー", "tree", "ki"],
+        photo: "images/tree.jpg"
+      },
+      {
+        id: "shoe",
+        display: "くつ",
+        hiragana: "くつ",
+        romaji: "kutsu",
+        spoken: "くつ",
+        slowSpoken: "く、つ。くつ。",
+        meaningZh: "鞋子",
+        hintZh: "穿在腳上走路",
+        sentence: "くつをはきます。",
+        sentenceRomaji: "Kutsu o hakimasu.",
+        sentenceZh: "穿鞋子。",
+        answers: ["くつ", "クツ", "靴", "くつです", "シューズ", "shoe", "shoes", "kutsu"],
+        photo: "images/shoe.jpg"
+      },
+      {
+        id: "umbrella",
+        display: "かさ",
+        hiragana: "かさ",
+        romaji: "kasa",
+        spoken: "かさ",
+        slowSpoken: "か、さ。かさ。",
+        meaningZh: "傘",
+        hintZh: "下雨天撐起來",
+        sentence: "かさをさします。",
+        sentenceRomaji: "Kasa o sashimasu.",
+        sentenceZh: "撐傘。",
+        answers: ["かさ", "カサ", "傘", "かさです", "アンブレラ", "umbrella", "kasa"],
+        photo: "images/umbrella.jpg"
+      },
+      {
+        id: "train",
+        display: "でんしゃ",
+        hiragana: "でんしゃ",
+        romaji: "densha",
+        spoken: "でんしゃ",
+        slowSpoken: "で、ん、しゃ。でんしゃ。",
+        meaningZh: "電車／火車",
+        hintZh: "在鐵軌上跑的交通工具",
+        sentence: "でんしゃにのります。",
+        sentenceRomaji: "Densha ni norimasu.",
+        sentenceZh: "搭電車。",
+        answers: ["でんしゃ", "デンシャ", "電車", "でんしゃです", "汽車", "きしゃ", "トレイン", "train", "densha"],
+        photo: "images/train.jpg"
+      },
+      {
+        id: "airplane",
+        display: "ひこうき",
+        hiragana: "ひこうき",
+        romaji: "hikōki",
+        spoken: "ひこうき",
+        slowSpoken: "ひ、こ、う、き。ひこうき。",
+        meaningZh: "飛機",
+        hintZh: "在天空飛的交通工具",
+        sentence: "ひこうきがとんでいます。",
+        sentenceRomaji: "Hikōki ga tonde imasu.",
+        sentenceZh: "飛機在飛。",
+        answers: ["ひこうき", "ヒコウキ", "飛行機", "ひこうきです", "飛行机", "エアプレーン", "airplane", "plane", "hikouki", "hikoki"],
+        photo: "images/airplane.jpg"
+      },
+      {
+        id: "rabbit",
+        display: "うさぎ",
+        hiragana: "うさぎ",
+        romaji: "usagi",
+        spoken: "うさぎ",
+        slowSpoken: "う、さ、ぎ。うさぎ。",
+        meaningZh: "兔子",
+        hintZh: "長耳朵跳跳跳",
+        sentence: "うさぎがぴょんぴょんします。",
+        sentenceRomaji: "Usagi ga pyonpyon shimasu.",
+        sentenceZh: "兔子蹦蹦跳。",
+        answers: ["うさぎ", "ウサギ", "兎", "うさぎです", "ラビット", "rabbit", "bunny", "usagi"],
+        photo: "images/rabbit.jpg"
+      },
+      {
+        id: "bear",
+        display: "くま",
+        hiragana: "くま",
+        romaji: "kuma",
+        spoken: "くま",
+        slowSpoken: "く、ま。くま。",
+        meaningZh: "熊",
+        hintZh: "圓圓大大的動物",
+        sentence: "くまくんはおおきいです。",
+        sentenceRomaji: "Kuma-kun wa ōkii desu.",
+        sentenceZh: "小熊好大。",
+        answers: ["くま", "クマ", "熊", "くまです", "ベアー", "bear", "kuma"],
+        photo: "images/bear.jpg"
+      },
+      {
+        id: "orange",
+        display: "みかん",
+        hiragana: "みかん",
+        romaji: "mikan",
+        spoken: "みかん",
+        slowSpoken: "み、か、ん。みかん。",
+        meaningZh: "橘子／橙",
+        hintZh: "圓圓橘色的水果",
+        sentence: "みかんをたべます。",
+        sentenceRomaji: "Mikan o tabemasu.",
+        sentenceZh: "吃橘子。",
+        answers: ["みかん", "ミカン", "蜜柑", "みかんです", "オレンジ", "おれんじ", "orange", "mikan"],
+        photo: "images/orange.jpg"
+      },
+      {
+        id: "grape",
+        display: "ぶどう",
+        hiragana: "ぶどう",
+        romaji: "budō",
+        spoken: "ぶどう",
+        slowSpoken: "ぶ、ど、う。ぶどう。",
+        meaningZh: "葡萄",
+        hintZh: "一串一串的紫水果",
+        sentence: "ぶどうがおいしいです。",
+        sentenceRomaji: "Budō ga oishii desu.",
+        sentenceZh: "葡萄很好吃。",
+        answers: ["ぶどう", "ブドウ", "葡萄", "ぶどうです", "グレープ", "grape", "budou", "budo"],
+        photo: "images/grape.jpg"
+      }
+    ];
+
+
+    const ITEM_BY_ID = Object.fromEntries(ITEMS.map(i => [i.id, i]));
+    const DAILY_COUNT = 10;
+    const STORAGE_KEY = "jpKgDaily_v1";
+    const EXAM_SIZE_VERSION = 2; // bumped when daily size changed 5 → 10
+    const ANCHOR_YESTERDAY = "2026-10-01";
+    const ANCHOR_TODAY = "2026-10-02";
+
+    /* ========== localStorage helpers ========== */
+    function dateKeyFromDate(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return y + "-" + m + "-" + day;
+    }
+
+    function todayKey() {
+      return dateKeyFromDate(new Date());
+    }
+
+    function formatDateZh(key) {
+      const [y, m, d] = key.split("-");
+      return y + "年" + Number(m) + "月" + Number(d) + "日";
+    }
+
+    function shiftDateKey(dateKey, deltaDays) {
+      const [y, m, d] = dateKey.split("-").map(Number);
+      const dt = new Date(y, m - 1, d);
+      dt.setDate(dt.getDate() + deltaDays);
+      return dateKeyFromDate(dt);
+    }
+
+    function prevDateKey(dateKey) {
+      return shiftDateKey(dateKey, -1);
+    }
+
+    function nextDateKey(dateKey) {
+      return shiftDateKey(dateKey, 1);
+    }
+
+    function isValidDateKey(key) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(key)) return false;
+      const [y, m, d] = key.split("-").map(Number);
+      const dt = new Date(y, m - 1, d);
+      return dateKeyFromDate(dt) === key;
+    }
+
+    function emptyStore() {
+      return { streak: 0, lastCompletedDate: null, days: {}, wrongIds: [], examSizeVersion: EXAM_SIZE_VERSION };
+    }
+
+    function hasDayProgress(rec) {
+      if (!rec) return false;
+      return !!(rec.completed || (rec.answered && rec.answered.length) || rec.score);
+    }
+
+    function migrateStore(data) {
+      if (!data || typeof data !== "object") data = emptyStore();
+      if (!data.days) data.days = {};
+      if (!Array.isArray(data.wrongIds)) data.wrongIds = [];
+      if (typeof data.streak !== "number") data.streak = 0;
+
+      // One-time: preserve any prior progress under ANCHOR_TODAY by moving it to ANCHOR_YESTERDAY,
+      // then force ANCHOR_TODAY to a fresh 10-question exam. Never wipe existing Oct 1 answers.
+      if (data.examSizeVersion !== EXAM_SIZE_VERSION) {
+        const oct1 = data.days[ANCHOR_YESTERDAY];
+        const oct2 = data.days[ANCHOR_TODAY];
+        if (hasDayProgress(oct2)) {
+          if (!hasDayProgress(oct1)) {
+            data.days[ANCHOR_YESTERDAY] = Object.assign({}, oct2);
+          } else {
+            // Merge answered ids into Oct 1 without wiping existing progress
+            const merged = Object.assign({}, oct1);
+            const seen = new Set((merged.answered || []).map(a => a.id));
+            const extra = (oct2.answered || []).filter(a => a && a.id && !seen.has(a.id));
+            merged.answered = (merged.answered || []).concat(extra);
+            const oct1Ids = merged.itemIds || [];
+            const extraIds = (oct2.itemIds || []).filter(id => !oct1Ids.includes(id));
+            // Keep historical Oct 1 length; only add ids that were already answered there
+            const answeredExtra = extra.map(a => a.id).filter(id => !oct1Ids.includes(id));
+            if (answeredExtra.length) {
+              merged.itemIds = oct1Ids.concat(answeredExtra);
+            }
+            merged.score = (merged.answered || []).filter(a => a.correct).length;
+            if (merged.itemIds && merged.answered && merged.answered.length >= merged.itemIds.length) {
+              merged.completed = true;
+            }
+            data.days[ANCHOR_YESTERDAY] = merged;
+          }
+          if (data.lastCompletedDate === ANCHOR_TODAY) {
+            data.lastCompletedDate = ANCHOR_YESTERDAY;
+          }
+        }
+        // Fresh 10-question set for today (2026-10-02)
+        data.days[ANCHOR_TODAY] = {
+          itemIds: dailyItemIds(ANCHOR_TODAY),
+          answered: [],
+          completed: false,
+          score: 0
+        };
+        data.examSizeVersion = EXAM_SIZE_VERSION;
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (_) {}
+      }
+      return data;
+    }
+
+    function loadStore() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          return migrateStore(emptyStore());
+        }
+        const data = JSON.parse(raw);
+        return migrateStore(data);
+      } catch (_) {
+        return migrateStore(emptyStore());
+      }
+    }
+
+    function saveStore(data) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      } catch (_) {}
+    }
+
+    function seededShuffle(arr, seedStr) {
+      let seed = 0;
+      for (let i = 0; i < seedStr.length; i++) {
+        seed = (seed * 31 + seedStr.charCodeAt(i)) >>> 0;
+      }
+      const a = arr.slice();
+      const rand = () => {
+        seed = (seed * 1664525 + 1013904223) >>> 0;
+        return seed / 4294967296;
+      };
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(rand() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function dailyItemIds(dateKey) {
+      return seededShuffle(ITEMS.map(i => i.id), "daily-" + dateKey).slice(0, DAILY_COUNT);
+    }
+
+    function ensureDayRecord(store, dateKey) {
+      const key = dateKey || todayKey();
+      if (!store.days[key]) {
+        store.days[key] = {
+          itemIds: dailyItemIds(key),
+          answered: [], // [{id, correct:bool}]
+          completed: false,
+          score: 0
+        };
+        saveStore(store);
+      } else if (!store.days[key].itemIds || !store.days[key].itemIds.length) {
+        store.days[key].itemIds = dailyItemIds(key);
+        saveStore(store);
+      } else if (
+        key === todayKey() &&
+        !hasDayProgress(store.days[key]) &&
+        store.days[key].itemIds.length !== DAILY_COUNT
+      ) {
+        // Unstarted today with stale size (e.g. old 5-item seed) → refresh to current daily size
+        store.days[key].itemIds = dailyItemIds(key);
+        store.days[key].answered = [];
+        store.days[key].completed = false;
+        store.days[key].score = 0;
+        saveStore(store);
+      }
+      // Drop unknown ids (removed vocab) so sessions don't break
+      if (store.days[key].itemIds) {
+        const filtered = store.days[key].itemIds.filter(id => ITEM_BY_ID[id]);
+        if (filtered.length !== store.days[key].itemIds.length) {
+          store.days[key].itemIds = filtered.length ? filtered : dailyItemIds(key);
+          saveStore(store);
+        }
+      }
+      return store.days[key];
+    }
+
+    function ensureTodayRecord(store) {
+      // Back-compat alias: uses currently selected home date
+      return ensureDayRecord(store, viewDateKey);
+    }
+
+    function markDailyAnswer(itemId, correct) {
+      if (playMode !== "daily") return;
+      const store = loadStore();
+      const key = activeExamDateKey || viewDateKey || todayKey();
+      const rec = ensureDayRecord(store, key);
+      const already = rec.answered.find(a => a.id === itemId);
+      if (!already) {
+        rec.answered.push({ id: itemId, correct: !!correct });
+        if (correct) rec.score = (rec.score || 0) + 1;
+      }
+      if (!correct) {
+        if (!store.wrongIds.includes(itemId)) store.wrongIds.unshift(itemId);
+        store.wrongIds = store.wrongIds.filter((id, i, arr) => arr.indexOf(id) === i).slice(0, 24);
+      } else {
+        // keep wrong history even if later correct; optional soft remove:
+        // leave as-is so review still useful
+      }
+      if (rec.answered.length >= rec.itemIds.length) {
+        rec.completed = true;
+        // Streak only counts when completing the real calendar-today exam
+        const realToday = todayKey();
+        if (key === realToday && store.lastCompletedDate !== realToday) {
+          if (store.lastCompletedDate === prevDateKey(realToday)) {
+            store.streak = (store.streak || 0) + 1;
+          } else {
+            store.streak = 1;
+          }
+          store.lastCompletedDate = realToday;
+        }
+      }
+      saveStore(store);
+    }
+
+    function resetDayExam(dateKey) {
+      const store = loadStore();
+      const key = dateKey || viewDateKey || todayKey();
+      store.days[key] = {
+        itemIds: dailyItemIds(key),
+        answered: [],
+        completed: false,
+        score: 0
+      };
+      saveStore(store);
+    }
+
+    function resetTodayExam() {
+      resetDayExam(viewDateKey);
+    }
+
+    function setViewDateKey(nextKey) {
+      const realToday = todayKey();
+      let key = nextKey;
+      if (!isValidDateKey(key)) key = realToday;
+      // Do not allow future dates beyond today
+      if (key > realToday) key = realToday;
+      viewDateKey = key;
+      const picker = $("homeDatePicker");
+      if (picker) {
+        picker.value = viewDateKey;
+        picker.max = realToday;
+      }
+      $("btnNextDay").disabled = viewDateKey >= realToday;
+      // Close review preview when switching days so actions stay in sync
+      if ($("reviewPreview") && !$("reviewPreview").classList.contains("hidden")) {
+        $("reviewPreview").classList.add("hidden");
+        $("homeCard").querySelector(".home-actions").classList.remove("hidden");
+      }
+      refreshHomeUI();
+    }
+
+    /* ========== State ========== */
+    let order = [];
+    let index = 0;
+    let score = 0;
+    let recognizing = false;
+    let teachMode = false;
+    let sentenceMode = false;
+    let awaitingPractice = false;
+    let awaitingShadow = false;
+    let answeredThisQ = false;
+    let recognition = null;
+    let voiceSupported = false;
+    let ttsUnlocked = false;
+    let autoAdvanceTimer = null;
+    let playMode = "home"; // home | daily | review | practice
+    let sessionWrong = [];
+    let viewDateKey = todayKey(); // home selected date (localStorage days[*] key)
+    let activeExamDateKey = null; // date of currently running daily session
+
+    const $ = (id) => document.getElementById(id);
+    const scene = $("scene");
+    const feedback = $("feedback");
+    const teachBox = $("teachBox");
+    const progress = $("progress");
+    const textAnswer = $("textAnswer");
+    const choicesEl = $("choices");
+    const practiceChoicesEl = $("practiceChoices");
+
+    function hasSpeechRecognition() {
+      return !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+    }
+
+    /* ========== Speech helpers (iOS-friendly) ========== */
+    function pickVoice() {
+      const voices = speechSynthesis.getVoices();
+      return (
+        voices.find(v => v.lang === "ja-JP" && /Google|Kyoko|Otoya|Haruka|Ichiro|Samantha/i.test(v.name)) ||
+        voices.find(v => v.lang === "ja-JP") ||
+        voices.find(v => v.lang && v.lang.startsWith("ja")) ||
+        null
+      );
+    }
+
+    function unlockTTS() {
+      if (ttsUnlocked || !("speechSynthesis" in window)) return;
+      try {
+        speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(" ");
+        u.volume = 0;
+        u.rate = 1;
+        speechSynthesis.speak(u);
+        speechSynthesis.cancel();
+        ttsUnlocked = true;
+      } catch (_) {}
+    }
+
+    function speak(text, opts = {}) {
+      return new Promise((resolve) => {
+        if (!("speechSynthesis" in window)) {
+          resolve();
+          return;
+        }
+        try {
+          speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(text);
+          u.lang = "ja-JP";
+          u.rate = opts.rate ?? 0.92;
+          u.pitch = opts.pitch ?? 1.05;
+          const v = pickVoice();
+          if (v) u.voice = v;
+          u.onend = () => resolve();
+          u.onerror = () => resolve();
+          speechSynthesis.speak(u);
+        } catch (_) {
+          resolve();
+        }
+      });
+    }
+
+    function speakZh(text, opts = {}) {
+      return new Promise((resolve) => {
+        if (!("speechSynthesis" in window)) {
+          resolve();
+          return;
+        }
+        try {
+          const u = new SpeechSynthesisUtterance(text);
+          u.lang = "zh-TW";
+          u.rate = opts.rate ?? 1;
+          const voices = speechSynthesis.getVoices();
+          const v =
+            voices.find(x => /zh-TW|zh-HK|Chinese.*Taiwan|Meijia|Ting-Ting|Mei-Jia/i.test(x.lang + x.name)) ||
+            voices.find(x => (x.lang || "").startsWith("zh")) ||
+            null;
+          if (v) u.voice = v;
+          u.onend = () => resolve();
+          u.onerror = () => resolve();
+          speechSynthesis.speak(u);
+        } catch (_) {
+          resolve();
+        }
+      });
+    }
+
+    if ("speechSynthesis" in window) {
+      speechSynthesis.getVoices();
+      speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+    }
+
+    ["touchstart", "click"].forEach((evt) => {
+      document.addEventListener(evt, unlockTTS, { once: true, passive: true });
+    });
+
+    function normalize(s) {
+      return (s || "")
+        .toString()
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .replace(/[。．\.、，,！!？?\s　]/g, "")
+        .replace(/です$|だ$|である$/g, "");
+    }
+
+    function toHiragana(str) {
+      return str.replace(/[\u30A1-\u30F6]/g, ch =>
+        String.fromCharCode(ch.charCodeAt(0) - 0x60)
+      );
+    }
+
+    function isCorrect(utterance, item) {
+      const raw = normalize(utterance);
+      const hira = toHiragana(raw);
+      return item.answers.some(a => {
+        const n = normalize(a);
+        const nh = toHiragana(n);
+        return raw === n || hira === nh || raw.includes(n) || hira.includes(nh) || n.includes(raw) || nh.includes(hira);
+      });
+    }
+
+    /* ========== UI ========== */
+    function shuffle(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function clearAutoAdvance() {
+      if (autoAdvanceTimer) {
+        clearTimeout(autoAdvanceTimer);
+        autoAdvanceTimer = null;
+      }
+    }
+
+    function renderProgress() {
+      progress.innerHTML = "";
+      order.forEach((item, i) => {
+        const d = document.createElement("div");
+        let cls = "dot";
+        if (i < index) cls += " done";
+        else if (i === index) cls += " current";
+        if (sessionWrong.includes(item.id) && i < index) {
+          cls = "dot wrong-dot";
+        }
+        d.className = cls;
+        progress.appendChild(d);
+      });
+    }
+
+    function currentItem() {
+      return order[index];
+    }
+
+    function setFeedback(html, kind) {
+      feedback.className = "feedback" + (kind ? " " + kind : "");
+      feedback.innerHTML = html;
+    }
+
+    function buildChoices(correctItem, container, onPick) {
+      container.innerHTML = "";
+      const distractors = shuffle(ITEMS.filter(x => x.id !== correctItem.id)).slice(0, 3);
+      const opts = shuffle([correctItem, ...distractors]);
+      opts.forEach((opt) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "choice-btn";
+        btn.textContent = opt.display;
+        btn.dataset.id = opt.id;
+        btn.addEventListener("click", () => onPick(opt, btn, container));
+        container.appendChild(btn);
+      });
+    }
+
+    function disableChoices(container) {
+      container.querySelectorAll(".choice-btn").forEach(b => { b.disabled = true; });
+    }
+
+    function hideTeach() {
+      teachBox.classList.remove("show");
+      teachMode = false;
+      awaitingPractice = false;
+      $("btnContinue").classList.add("hidden");
+      $("btnTrySay").classList.add("hidden");
+      practiceChoicesEl.innerHTML = "";
+      practiceChoicesEl.classList.add("hidden");
+    }
+
+    function hideSentence() {
+      const box = $("sentenceBox");
+      if (box) box.classList.remove("show");
+      sentenceMode = false;
+      awaitingShadow = false;
+      if ($("btnShadowSay")) $("btnShadowSay").classList.add("hidden");
+    }
+
+    function scenePhoto(item) {
+      const img = document.createElement("img");
+      img.src = item.photo;
+      img.alt = item.meaningZh + "（" + item.display + "）";
+      img.decoding = "async";
+      img.loading = "eager";
+      scene.innerHTML = "";
+      scene.appendChild(img);
+    }
+
+    async function showSentenceAfterCorrect(item) {
+      sentenceMode = true;
+      awaitingShadow = true;
+      hideTeach();
+      const box = $("sentenceBox");
+      box.classList.add("show");
+      $("sentenceJp").textContent = item.sentence || ("これは" + item.display + "です。");
+      if (item.sentenceRomaji) {
+        $("sentenceRomaji").textContent = item.sentenceRomaji;
+        $("sentenceRomaji").classList.remove("hidden");
+      } else {
+        $("sentenceRomaji").textContent = "";
+        $("sentenceRomaji").classList.add("hidden");
+      }
+      if (item.sentenceZh) {
+        $("sentenceZh").textContent = item.sentenceZh;
+        $("sentenceZh").classList.remove("hidden");
+      } else {
+        $("sentenceZh").textContent = "";
+        $("sentenceZh").classList.add("hidden");
+      }
+      $("sentenceInvite").textContent = "跟著說一次吧！（影子跟讀）";
+      if (voiceSupported) {
+        $("btnShadowSay").classList.remove("hidden");
+      } else {
+        $("btnShadowSay").classList.add("hidden");
+      }
+      setFeedback(
+        "正解！✨ 聽聽這個句子，再跟著說一次～",
+        "ok"
+      );
+      const sentence = item.sentence || ("これは" + item.display + "です。");
+      await speak(sentence, { rate: 0.88 });
+      await speakZh("請跟著說一次。");
+    }
+
+    function showTeach(item, reason) {
+      teachMode = true;
+      teachBox.classList.add("show");
+      $("teachWord").textContent = item.display;
+      $("teachFuri").textContent = "ひらがな：" + item.hiragana;
+      $("teachRomaji").textContent = "Romaji：" + item.romaji;
+      $("teachMeaning").textContent = "中文意思：" + item.meaningZh;
+      $("teachHint").textContent =
+        reason === "idk"
+          ? "先慢慢聽一次，再點選正確單字練習～"
+          : "再聽一次正確說法，然後點選練習吧！";
+      $("btnContinue").classList.add("hidden");
+      showPracticeChoices(item);
+      setFeedback(
+        reason === "idk"
+          ? "沒關係！我們一起來學這個單字 💙"
+          : "差一點！一起看看正確答案吧 💛",
+        "teach"
+      );
+    }
+
+    function showPracticeChoices(item) {
+      practiceChoicesEl.classList.remove("hidden");
+      buildChoices(item, practiceChoicesEl, (opt, btn, container) => {
+        disableChoices(container);
+        if (opt.id === item.id) {
+          btn.classList.add("correct");
+          setFeedback("說得很好！「" + item.display + "」✔　" + item.meaningZh, "ok");
+          speak("すごい！", { rate: 1 });
+          awaitingPractice = false;
+          $("btnContinue").classList.remove("hidden");
+          clearAutoAdvance();
+          autoAdvanceTimer = setTimeout(() => {
+            if (teachMode && index < order.length) nextQuestion();
+          }, 1400);
+        } else {
+          btn.classList.add("wrong");
+          setFeedback(
+            "再聽一次：<strong>" + item.display + "</strong>（" + item.hiragana + "）",
+            "bad"
+          );
+          speak(item.spoken, { rate: 0.75 });
+          $("btnContinue").classList.remove("hidden");
+          setTimeout(() => showPracticeChoices(item), 900);
+        }
+      });
+    }
+
+    async function teachWordFlow(item, reason) {
+      answeredThisQ = true;
+      hideSentence();
+      choicesEl.querySelectorAll(".choice-btn").forEach(b => { b.disabled = true; });
+      if (!sessionWrong.includes(item.id)) sessionWrong.push(item.id);
+      markDailyAnswer(item.id, false);
+      showTeach(item, reason);
+      awaitingPractice = true;
+      if (voiceSupported) {
+        $("btnTrySay").classList.remove("hidden");
+      } else {
+        $("btnTrySay").classList.add("hidden");
+      }
+      await speak(item.slowSpoken || item.spoken, { rate: 0.7 });
+      await speakZh("意思是" + item.meaningZh + "。");
+      await speakZh("現在請點選正確的單字練習。");
+    }
+
+    function showQuestion(speakPrompt) {
+      clearAutoAdvance();
+      const item = currentItem();
+      hideTeach();
+      hideSentence();
+      answeredThisQ = false;
+      scenePhoto(item);
+      $("qLabel").textContent = "第 " + (index + 1) + " 題 / 共 " + order.length + " 題";
+      $("scoreLabel").textContent = "得分 " + score;
+      textAnswer.value = "";
+      setFeedback("提示：" + item.hintZh + "　請點選正確的日語！", "");
+      renderProgress();
+      buildChoices(item, choicesEl, onMainChoice);
+      if (speakPrompt) {
+        speak("これは何ですか？", { rate: 0.95 });
+      }
+    }
+
+    async function onMainChoice(opt, btn, container) {
+      if (answeredThisQ || teachMode) return;
+      unlockTTS();
+      const item = currentItem();
+      answeredThisQ = true;
+      disableChoices(container);
+      if (opt.id === item.id) {
+        btn.classList.add("correct");
+        score++;
+        $("scoreLabel").textContent = "得分 " + score;
+        markDailyAnswer(item.id, true);
+        setFeedback("正解！✨ 「" + item.display + "」（" + item.hiragana + "）＝" + item.meaningZh, "ok");
+        await speak("すごい！正解です！", { rate: 1 });
+        clearAutoAdvance();
+        await showSentenceAfterCorrect(item);
+      } else {
+        btn.classList.add("wrong");
+        container.querySelectorAll(".choice-btn").forEach(b => {
+          if (b.dataset.id === item.id) b.classList.add("correct");
+        });
+        setFeedback(
+          "正確答案是 <strong>" + item.display + "</strong>（" +
+            item.hiragana + " / " + item.romaji + "）＝" + item.meaningZh,
+          "bad"
+        );
+        await speak("違います。" + item.spoken + "です。", { rate: 0.85 });
+        await teachWordFlow(item, "wrong");
+      }
+    }
+
+    function modeLabel() {
+      if (playMode === "daily") {
+        const key = activeExamDateKey || viewDateKey;
+        return key === todayKey() ? "今日測驗" : (formatDateZh(key) + " 測驗");
+      }
+      if (playMode === "review") return "複習模式";
+      if (playMode === "practice") return "自由練習";
+      return "";
+    }
+
+    function finishGame() {
+      clearAutoAdvance();
+      $("gameCard").classList.add("hidden");
+      progress.classList.add("hidden");
+      $("endCard").classList.remove("hidden");
+      const title =
+        playMode === "daily"
+          ? "今日測驗完成！おめでとう！"
+          : playMode === "review"
+            ? "複習完成！すごい！"
+            : "全部完成！おめでとう！";
+      $("endTitle").textContent = title;
+      $("endSummary").textContent =
+        "你答對了 " + score + " / " + order.length + " 題！真棒！よくできました！";
+      if (sessionWrong.length) {
+        $("btnEndReview").classList.remove("hidden");
+      } else {
+        $("btnEndReview").classList.add("hidden");
+      }
+      refreshHomeUI();
+      speak("よくできました！", { rate: 0.95 }).then(() => speakZh("全部完成，你好棒！"));
+    }
+
+    function nextQuestion() {
+      clearAutoAdvance();
+      index++;
+      if (index >= order.length) {
+        renderProgress();
+        finishGame();
+        return;
+      }
+      showQuestion(true);
+    }
+
+    async function handleAnswer(utterance) {
+      if (!utterance || !utterance.trim()) {
+        setFeedback("沒聽清楚耶，再試一次，或點選上方選項～", "bad");
+        return;
+      }
+      const item = currentItem();
+      const heard = utterance.trim();
+
+      if (awaitingShadow && sentenceMode) {
+        const sentence = item.sentence || ("これは" + item.display + "です。");
+        const okish = isCorrect(heard, item) || normalize(heard).includes(normalize(item.display)) ||
+          normalize(toHiragana(heard)).includes(normalize(toHiragana(item.hiragana)));
+        if (okish) {
+          setFeedback("跟讀很棒！「" + sentence + "」✔", "ok");
+          await speak("じょうず！", { rate: 1 });
+        } else {
+          setFeedback(
+            "你說的是「" + heard + "」。再聽一次句子，再跟讀一次～",
+            "bad"
+          );
+          await speak(sentence, { rate: 0.85 });
+        }
+        awaitingShadow = false;
+        clearAutoAdvance();
+        autoAdvanceTimer = setTimeout(() => {
+          if (sentenceMode && index < order.length) nextQuestion();
+        }, 1600);
+        return;
+      }
+
+      if (awaitingPractice) {
+        if (isCorrect(heard, item)) {
+          setFeedback("說得很好！「" + item.display + "」✔　" + item.meaningZh, "ok");
+          await speak("すごい！", { rate: 1 });
+          awaitingPractice = false;
+          $("btnContinue").classList.remove("hidden");
+          clearAutoAdvance();
+          autoAdvanceTimer = setTimeout(() => {
+            if (teachMode && index < order.length) nextQuestion();
+          }, 1600);
+        } else {
+          setFeedback(
+            "你說的是「" + heard + "」。再聽一次：<strong>" +
+              item.display + "</strong>（" + item.hiragana + "）",
+            "bad"
+          );
+          await speak(item.spoken, { rate: 0.75 });
+          $("btnContinue").classList.remove("hidden");
+        }
+        return;
+      }
+
+      if (answeredThisQ) return;
+      answeredThisQ = true;
+      disableChoices(choicesEl);
+
+      if (isCorrect(heard, item)) {
+        score++;
+        $("scoreLabel").textContent = "得分 " + score;
+        markDailyAnswer(item.id, true);
+        choicesEl.querySelectorAll(".choice-btn").forEach(b => {
+          if (b.dataset.id === item.id) b.classList.add("correct");
+        });
+        setFeedback("正解！✨ 「" + item.display + "」（" + item.hiragana + "）＝" + item.meaningZh, "ok");
+        await speak("すごい！正解です！", { rate: 1 });
+        clearAutoAdvance();
+        await showSentenceAfterCorrect(item);
+      } else {
+        choicesEl.querySelectorAll(".choice-btn").forEach(b => {
+          if (b.dataset.id === item.id) b.classList.add("correct");
+        });
+        setFeedback(
+          "你說的是「" + heard + "」。正確答案是 <strong>" +
+            item.display + "</strong>（" + item.hiragana + " / " +
+            item.romaji + "）＝" + item.meaningZh,
+          "bad"
+        );
+        await speak("違います。" + item.spoken + "です。", { rate: 0.85 });
+        await teachWordFlow(item, "wrong");
+      }
+    }
+
+    /* ========== Recognition (optional) ========== */
+    function applyVoiceUI() {
+      voiceSupported = hasSpeechRecognition();
+      if (!voiceSupported) {
+        $("micRow").classList.add("hidden");
+        $("btnTrySay").classList.add("hidden");
+        $("micNote").classList.remove("hidden");
+        $("compatNote").textContent =
+          "主要用「點選答案」遊玩，適合 iPhone Safari。可聽日語發音；本裝置無語音辨識。";
+      } else {
+        $("micRow").classList.remove("hidden");
+        $("micNote").classList.add("hidden");
+        $("compatNote").textContent =
+          "主要用「點選答案」；語音辨識為選用。建議允許麥克風權限。";
+      }
+    }
+
+    function setupRecognition() {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) return null;
+      const rec = new SR();
+      rec.lang = "ja-JP";
+      rec.interimResults = false;
+      rec.maxAlternatives = 3;
+      rec.continuous = false;
+
+      rec.onstart = () => {
+        recognizing = true;
+        $("btnMic").classList.add("listening");
+        $("btnMic").textContent = "🔴 正在聽…請說日語";
+        if ($("btnTrySay")) {
+          $("btnTrySay").classList.add("listening");
+        }
+        setFeedback("請用日語說出名稱…", "");
+      };
+      rec.onend = () => {
+        recognizing = false;
+        $("btnMic").classList.remove("listening");
+        $("btnMic").textContent = "🎤 用語音回答";
+        $("btnTrySay").classList.remove("listening");
+      };
+      rec.onerror = (e) => {
+        recognizing = false;
+        $("btnMic").classList.remove("listening");
+        $("btnMic").textContent = "🎤 用語音回答";
+        const map = {
+          "not-allowed": "請允許麥克風權限後再試，或改用點選答案。",
+          "no-speech": "沒聽到聲音，可改點選上方選項。",
+          "network": "語音服務需要網路；也可直接點選答案。",
+          "aborted": "已取消聆聽。"
+        };
+        setFeedback(map[e.error] || ("語音錯誤：" + e.error + "。請改用點選答案。"), "bad");
+      };
+      rec.onresult = (event) => {
+        const alts = [];
+        for (let i = 0; i < event.results[0].length; i++) {
+          alts.push(event.results[0][i].transcript);
+        }
+        const best = alts[0] || "";
+        setFeedback("辨識到：" + alts.join(" / "), "");
+        handleAnswer(best);
+      };
+      return rec;
+    }
+
+    function startListen() {
+      if (!voiceSupported) {
+        setFeedback("此裝置不支援語音辨識，請點選上方日語選項。", "bad");
+        return;
+      }
+      if (!recognition) {
+        recognition = setupRecognition();
+        if (!recognition) {
+          applyVoiceUI();
+          return;
+        }
+      }
+      if (recognizing) {
+        try { recognition.stop(); } catch (_) {}
+        return;
+      }
+      try {
+        speechSynthesis.cancel();
+        recognition.start();
+      } catch (err) {
+        setFeedback("無法啟動麥克風，請改用點選答案。", "bad");
+      }
+    }
+
+    /* ========== Home / modes ========== */
+    function showHome() {
+      clearAutoAdvance();
+      playMode = "home";
+      try { speechSynthesis.cancel(); } catch (_) {}
+      $("homeCard").classList.remove("hidden");
+      $("gameCard").classList.add("hidden");
+      $("endCard").classList.add("hidden");
+      progress.classList.add("hidden");
+      $("headerSub").textContent = "幼稚園每日小測驗・看圖學日語";
+      $("reviewPreview").classList.add("hidden");
+      $("homeCard").querySelector(".home-actions").classList.remove("hidden");
+      refreshHomeUI();
+    }
+
+    function refreshHomeUI() {
+      const store = loadStore();
+      const realToday = todayKey();
+      if (!viewDateKey || !isValidDateKey(viewDateKey) || viewDateKey > realToday) {
+        viewDateKey = realToday;
+      }
+      const key = viewDateKey;
+      const isToday = key === realToday;
+      const dayLabel = isToday ? "今日" : formatDateZh(key);
+      const rec = ensureDayRecord(store, key);
+      const done = (rec.answered || []).length;
+      const total = (rec.itemIds || []).length || DAILY_COUNT;
+      $("homeDateChip").textContent = (isToday ? "今日　" : "過去　") + formatDateZh(key);
+      $("homeProgressLabel").textContent = isToday ? "今日進度" : "該日進度";
+      $("homeProgressNum").textContent = done + "/" + total;
+      const picker = $("homeDatePicker");
+      if (picker) {
+        picker.value = key;
+        picker.max = realToday;
+      }
+      $("btnNextDay").disabled = key >= realToday;
+      // streak display: based on real calendar today, not the viewed date
+      let streak = store.streak || 0;
+      if (store.lastCompletedDate && store.lastCompletedDate !== realToday && store.lastCompletedDate !== prevDateKey(realToday)) {
+        streak = 0;
+      }
+      $("homeStreakNum").textContent = String(streak);
+      const btnCont = $("btnContinueDaily");
+      const btnStart = $("btnStartDaily");
+      const btnRetake = $("btnRetakeDaily");
+      btnRetake.textContent = isToday ? "🔄 重考今日（重新開始）" : "🔄 重考該日（重新開始）";
+      if (rec.completed) {
+        $("homeStatusHint").textContent = dayLabel + "測驗已完成！可以複習錯題，或重考該日。";
+        btnStart.classList.remove("hidden");
+        btnStart.textContent = "✅ " + dayLabel + "已完成（再看一次）";
+        btnCont.classList.add("hidden");
+      } else if (done > 0) {
+        $("homeStatusHint").textContent = dayLabel + "已做 " + done + " 題，還剩 " + (total - done) + " 題。";
+        btnStart.classList.add("hidden");
+        btnCont.classList.remove("hidden");
+        btnCont.textContent = "▶️ 繼續" + dayLabel + "測驗（剩餘 " + (total - done) + " 題）";
+      } else {
+        $("homeStatusHint").textContent = isToday
+          ? ("每天固定 " + DAILY_COUNT + " 題（依日期產生），練完可複習錯題。可切換日期查看過去進度。")
+          : (formatDateZh(key) + " 尚未作答。可開始該日測驗，或重考／複習。");
+        btnStart.classList.remove("hidden");
+        btnStart.textContent = isToday ? "📝 開始今日測驗" : ("📝 開始 " + formatDateZh(key) + " 測驗");
+        btnCont.classList.add("hidden");
+      }
+    }
+
+    function startSession(mode, items, startIndex) {
+      clearAutoAdvance();
+      playMode = mode;
+      order = items.slice();
+      index = Math.max(0, Math.min(startIndex || 0, Math.max(0, order.length - 1)));
+      // score: for continue daily, count prior correct
+      if (mode === "daily" && startIndex) {
+        const store = loadStore();
+        const rec = ensureDayRecord(store, activeExamDateKey || viewDateKey);
+        score = rec.answered.filter(a => a.correct).length;
+      } else {
+        score = 0;
+      }
+      sessionWrong = [];
+      answeredThisQ = false;
+      $("homeCard").classList.add("hidden");
+      $("endCard").classList.add("hidden");
+      $("gameCard").classList.remove("hidden");
+      progress.classList.remove("hidden");
+      $("modeBadge").textContent = modeLabel();
+      $("headerSub").textContent = modeLabel() + "・看圖片點選日語";
+      applyVoiceUI();
+      recognition = voiceSupported ? setupRecognition() : null;
+      showQuestion(false);
+      setFeedback("提示：點「再聽問題」或直接點選日語答案開始！", "");
+    }
+
+    function startDaily(fromScratch) {
+      unlockTTS();
+      const key = viewDateKey || todayKey();
+      activeExamDateKey = key;
+      if (fromScratch) resetDayExam(key);
+      const rec = ensureDayRecord(loadStore(), key);
+      const ids = rec.itemIds;
+      const items = ids.map(id => ITEM_BY_ID[id]).filter(Boolean);
+      let startIdx = 0;
+      if (!fromScratch) {
+        const answeredIds = new Set((rec.answered || []).map(a => a.id));
+        startIdx = ids.findIndex(id => !answeredIds.has(id));
+        if (startIdx < 0) startIdx = 0; // completed → replay from start
+        if (rec.completed) startIdx = 0;
+      }
+      startSession("daily", items, startIdx);
+    }
+
+    function collectReviewItems() {
+      const store = loadStore();
+      const ids = [];
+      // session + stored wrong + today's wrong
+      sessionWrong.forEach(id => { if (!ids.includes(id)) ids.push(id); });
+      (store.wrongIds || []).forEach(id => { if (!ids.includes(id)) ids.push(id); });
+      const rec = ensureDayRecord(store, viewDateKey);
+      (rec.answered || []).filter(a => !a.correct).forEach(a => {
+        if (!ids.includes(a.id)) ids.push(a.id);
+      });
+      // If empty, show all items as "past items" review pool
+      if (!ids.length) return ITEMS.slice();
+      return ids.map(id => ITEM_BY_ID[id]).filter(Boolean);
+    }
+
+    function showReviewPreview() {
+      unlockTTS();
+      const items = collectReviewItems();
+      const list = $("reviewList");
+      list.innerHTML = "";
+      items.slice(0, 12).forEach(item => {
+        const row = document.createElement("div");
+        row.className = "review-item";
+        row.innerHTML =
+          '<img src="' + item.photo + '" alt="" />' +
+          '<div class="meta"><div class="jp">' + item.display +
+          ' <span style="font-weight:600;color:var(--muted);font-size:0.9rem">(' +
+          item.romaji + ')</span></div><div class="zh">' +
+          item.meaningZh + "</div></div>";
+        list.appendChild(row);
+      });
+      $("homeCard").querySelector(".home-actions").classList.add("hidden");
+      $("reviewPreview").classList.remove("hidden");
+      $("btnStartReview").onclick = () => {
+        startSession("review", items, 0);
+      };
+    }
+
+    /* ========== Events ========== */
+    $("btnAsk").addEventListener("click", () => {
+      unlockTTS();
+      speak("これは何ですか？", { rate: 0.95 });
+    });
+
+    $("btnMic").addEventListener("click", () => {
+      unlockTTS();
+      startListen();
+    });
+
+    $("btnTextSubmit").addEventListener("click", () => {
+      unlockTTS();
+      handleAnswer(textAnswer.value);
+    });
+    textAnswer.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        unlockTTS();
+        handleAnswer(textAnswer.value);
+      }
+    });
+
+    $("btnIdk").addEventListener("click", async () => {
+      unlockTTS();
+      if (answeredThisQ && !teachMode) return;
+      const item = currentItem();
+      speechSynthesis.cancel();
+      if (recognizing && recognition) {
+        try { recognition.stop(); } catch (_) {}
+      }
+      await teachWordFlow(item, "idk");
+    });
+
+    $("btnReplayWord").addEventListener("click", () => {
+      unlockTTS();
+      const item = currentItem();
+      speak(item.slowSpoken || item.spoken, { rate: 0.7 });
+    });
+
+    $("btnTrySay").addEventListener("click", () => {
+      unlockTTS();
+      awaitingPractice = true;
+      startListen();
+    });
+
+    $("btnReplaySentence").addEventListener("click", () => {
+      unlockTTS();
+      const item = currentItem();
+      const sentence = item.sentence || ("これは" + item.display + "です。");
+      awaitingShadow = true;
+      speak(sentence, { rate: 0.85 });
+    });
+
+    $("btnShadowSay").addEventListener("click", () => {
+      unlockTTS();
+      awaitingShadow = true;
+      startListen();
+    });
+
+    $("btnSentenceContinue").addEventListener("click", () => {
+      unlockTTS();
+      nextQuestion();
+    });
+
+    $("btnContinue").addEventListener("click", () => {
+      unlockTTS();
+      nextQuestion();
+    });
+
+    $("btnRestart").addEventListener("click", () => {
+      unlockTTS();
+      if (playMode === "daily") startDaily(true);
+      else if (playMode === "review") startSession("review", collectReviewItems(), 0);
+      else startSession("practice", shuffle(ITEMS), 0);
+    });
+
+    $("btnEndHome").addEventListener("click", () => {
+      unlockTTS();
+      showHome();
+    });
+
+    $("btnEndReview").addEventListener("click", () => {
+      unlockTTS();
+      const items = collectReviewItems();
+      startSession("review", items, 0);
+    });
+
+    $("btnBackHome").addEventListener("click", () => {
+      unlockTTS();
+      showHome();
+    });
+
+    $("btnStartDaily").addEventListener("click", () => startDaily(false));
+    $("btnContinueDaily").addEventListener("click", () => startDaily(false));
+    $("btnRetakeDaily").addEventListener("click", () => {
+      const label = viewDateKey === todayKey() ? "今日" : formatDateZh(viewDateKey);
+      if (confirm("要清除「" + label + "」進度並重新開始嗎？")) startDaily(true);
+    });
+    $("btnReviewWrong").addEventListener("click", showReviewPreview);
+    $("btnCloseReviewPreview").addEventListener("click", () => {
+      $("reviewPreview").classList.add("hidden");
+      $("homeCard").querySelector(".home-actions").classList.remove("hidden");
+    });
+    $("btnFreePlay").addEventListener("click", () => {
+      unlockTTS();
+      startSession("practice", shuffle(ITEMS), 0);
+    });
+
+    $("btnPrevDay").addEventListener("click", () => {
+      setViewDateKey(prevDateKey(viewDateKey));
+    });
+    $("btnNextDay").addEventListener("click", () => {
+      setViewDateKey(nextDateKey(viewDateKey));
+    });
+    $("homeDatePicker").addEventListener("change", () => {
+      const v = $("homeDatePicker").value;
+      if (v) setViewDateKey(v);
+    });
+    $("homeDateChip").addEventListener("click", () => {
+      const picker = $("homeDatePicker");
+      try {
+        if (picker.showPicker) picker.showPicker();
+        else picker.focus();
+      } catch (_) {
+        picker.focus();
+      }
+    });
+
+    // Fix duplicate class on continue btn from markup
+    $("btnContinueDaily").classList.add("hidden");
+
+    showHome();
+  </script>
+</body>
+</html>
