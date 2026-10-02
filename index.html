@@ -791,7 +791,7 @@
         </div>
       </div>
 
-      <p class="home-hint" id="homeStatusHint">每天固定 10 題（看圖＋數數），練完可複習錯題。</p>
+      <p class="home-hint" id="homeStatusHint">每天固定 10 題（約5新詞＋2新數數＋舊詞複習），練完可複習錯題。</p>
 
       <div class="home-actions">
         <button type="button" class="btn-primary" id="btnStartDaily">📝 開始今日測驗</button>
@@ -1585,6 +1585,88 @@
         photo: "images/blocks.jpg"
       }
 
+      ,
+      {
+        id: "monkey",
+        display: "さる",
+        hiragana: "さる",
+        romaji: "saru",
+        spoken: "さる",
+        slowSpoken: "さ、る。さる。",
+        meaningZh: "猴子",
+        hintZh: "樹上跳來跳去的動物",
+        sentence: "さるがいます。",
+        sentenceRomaji: "Saru ga imasu.",
+        sentenceZh: "有一隻猴子。",
+        answers: ["さる", "サル", "猿", "さるです", "モンキー", "monkey", "saru"],
+        photo: "images/monkey.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "horse",
+        display: "うま",
+        hiragana: "うま",
+        romaji: "uma",
+        spoken: "うま",
+        slowSpoken: "う、ま。うま。",
+        meaningZh: "馬",
+        hintZh: "跑得很快的動物",
+        sentence: "うまがはしります。",
+        sentenceRomaji: "Uma ga hashirimasu.",
+        sentenceZh: "馬在跑。",
+        answers: ["うま", "ウマ", "馬", "うまです", "ホース", "horse", "uma", "ポニー"],
+        photo: "images/horse.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "bag",
+        display: "かばん",
+        hiragana: "かばん",
+        romaji: "kaban",
+        spoken: "かばん",
+        slowSpoken: "か、ば、ん。かばん。",
+        meaningZh: "包包／背包",
+        hintZh: "背著或提著裝東西",
+        sentence: "かばんをもちます。",
+        sentenceRomaji: "Kaban o mochimasu.",
+        sentenceZh: "提著包包。",
+        answers: ["かばん", "カバン", "鞄", "かばんです", "バッグ", "リュック", "bag", "backpack", "kaban"],
+        photo: "images/bag.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "cookie",
+        display: "クッキー",
+        hiragana: "くっきー",
+        romaji: "kukkī",
+        spoken: "クッキー",
+        slowSpoken: "く、っ、きー。クッキー。",
+        meaningZh: "餅乾",
+        hintZh: "甜甜脆脆的點心",
+        sentence: "クッキーをたべます。",
+        sentenceRomaji: "Kukkī o tabemasu.",
+        sentenceZh: "吃餅乾。",
+        answers: ["クッキー", "くっきー", "餅乾", "饼干", "クッキーです", "cookie", "cookies", "biscuit", "kukkii", "kuki"],
+        photo: "images/cookie.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "cup",
+        display: "コップ",
+        hiragana: "こっぷ",
+        romaji: "koppu",
+        spoken: "コップ",
+        slowSpoken: "こ、っ、ぷ。コップ。",
+        meaningZh: "杯子",
+        hintZh: "喝水用的杯子",
+        sentence: "コップでみずをのみます。",
+        sentenceRomaji: "Koppu de mizu o nomimasu.",
+        sentenceZh: "用杯子喝水。",
+        answers: ["コップ", "こっぷ", "杯子", "コップです", "カップ", "マグ", "cup", "mug", "koppu", "glass"],
+        photo: "images/cup.jpg",
+        addedDate: "2026-10-02"
+      }
+
     ];
 
     /* ========== Number questions (count objects / say number) ========== */
@@ -1724,20 +1806,257 @@
         sentenceZh: "有八個球。",
         answers: ["はち", "ハチ", "八", "8", "やっつ", "八つ", "eight", "hachi"],
         photo: "images/count-8-balls.jpg"
+      },
+      {
+        id: "num-9-circles",
+        kind: "number",
+        count: 9,
+        display: "きゅう",
+        hiragana: "きゅう",
+        romaji: "kyū",
+        spoken: "きゅう",
+        slowSpoken: "きゅ、う。きゅう。",
+        meaningZh: "九（9個）",
+        hintZh: "數一數有幾個圓圓？",
+        sentence: "まるがここのつあります。",
+        sentenceRomaji: "Maru ga kokonotsu arimasu.",
+        sentenceZh: "有九個圓形。",
+        answers: ["きゅう", "キュウ", "く", "九", "9", "ここのつ", "九つ", "nine", "kyuu", "kyu", "ku"],
+        photo: "images/count-9-circles.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "num-10-stars",
+        kind: "number",
+        count: 10,
+        display: "じゅう",
+        hiragana: "じゅう",
+        romaji: "jū",
+        spoken: "じゅう",
+        slowSpoken: "じゅ、う。じゅう。",
+        meaningZh: "十（10個）",
+        hintZh: "數一數有幾顆星星？",
+        sentence: "ほしがとおあります。",
+        sentenceRomaji: "Hoshi ga tō arimasu.",
+        sentenceZh: "有十顆星星。",
+        answers: ["じゅう", "ジュウ", "十", "10", "とお", "十つ", "ten", "juu", "ju", "tou", "to"],
+        photo: "images/count-10-stars.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "num-11-hearts",
+        kind: "number",
+        count: 11,
+        display: "じゅういち",
+        hiragana: "じゅういち",
+        romaji: "jūichi",
+        spoken: "じゅういち",
+        slowSpoken: "じゅ、う、い、ち。じゅういち。",
+        meaningZh: "十一（11個）",
+        hintZh: "數一數有幾顆愛心？",
+        sentence: "ハートがじゅういちこあります。",
+        sentenceRomaji: "Hāto ga jūichi-ko arimasu.",
+        sentenceZh: "有十一顆愛心。",
+        answers: ["じゅういち", "ジュウイチ", "十一", "11", "eleven", "juuichi", "juichi"],
+        photo: "images/count-11-hearts.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "num-12-apples",
+        kind: "number",
+        count: 12,
+        display: "じゅうに",
+        hiragana: "じゅうに",
+        romaji: "jūni",
+        spoken: "じゅうに",
+        slowSpoken: "じゅ、う、に。じゅうに。",
+        meaningZh: "十二（12個）",
+        hintZh: "數一數有幾個蘋果？",
+        sentence: "りんごがじゅうにこあります。",
+        sentenceRomaji: "Ringo ga jūni-ko arimasu.",
+        sentenceZh: "有十二個蘋果。",
+        answers: ["じゅうに", "ジュウニ", "十二", "12", "twelve", "juuni", "juni"],
+        photo: "images/count-12-apples.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "num-13-balls",
+        kind: "number",
+        count: 13,
+        display: "じゅうさん",
+        hiragana: "じゅうさん",
+        romaji: "jūsan",
+        spoken: "じゅうさん",
+        slowSpoken: "じゅ、う、さ、ん。じゅうさん。",
+        meaningZh: "十三（13個）",
+        hintZh: "數一數有幾個球？",
+        sentence: "ボールがじゅうさんこあります。",
+        sentenceRomaji: "Bōru ga jūsan-ko arimasu.",
+        sentenceZh: "有十三個球。",
+        answers: ["じゅうさん", "ジュウサン", "十三", "13", "thirteen", "juusan", "jusan"],
+        photo: "images/count-13-balls.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "num-14-flowers",
+        kind: "number",
+        count: 14,
+        display: "じゅうよん",
+        hiragana: "じゅうよん",
+        romaji: "jūyon",
+        spoken: "じゅうよん",
+        slowSpoken: "じゅ、う、よ、ん。じゅうよん。",
+        meaningZh: "十四（14個）",
+        hintZh: "數一數有幾朵花？",
+        sentence: "はながじゅうよんこあります。",
+        sentenceRomaji: "Hana ga jūyon-ko arimasu.",
+        sentenceZh: "有十四朵花。",
+        answers: ["じゅうよん", "ジュウヨン", "じゅうし", "十四", "14", "fourteen", "juuyon", "juyon", "juushi"],
+        photo: "images/count-14-flowers.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "num-15-fish",
+        kind: "number",
+        count: 15,
+        display: "じゅうご",
+        hiragana: "じゅうご",
+        romaji: "jūgo",
+        spoken: "じゅうご",
+        slowSpoken: "じゅ、う、ご。じゅうご。",
+        meaningZh: "十五（15個）",
+        hintZh: "數一數有幾條魚？",
+        sentence: "さかながじゅうごこあります。",
+        sentenceRomaji: "Sakana ga jūgo-ko arimasu.",
+        sentenceZh: "有十五條魚。",
+        answers: ["じゅうご", "ジュウゴ", "十五", "15", "fifteen", "juugo", "jugo"],
+        photo: "images/count-15-fish.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "num-16-circles",
+        kind: "number",
+        count: 16,
+        display: "じゅうろく",
+        hiragana: "じゅうろく",
+        romaji: "jūroku",
+        spoken: "じゅうろく",
+        slowSpoken: "じゅ、う、ろ、く。じゅうろく。",
+        meaningZh: "十六（16個）",
+        hintZh: "數一數有幾個圓圓？",
+        sentence: "まるがじゅうろくこあります。",
+        sentenceRomaji: "Maru ga jūroku-ko arimasu.",
+        sentenceZh: "有十六個圓形。",
+        answers: ["じゅうろく", "ジュウロク", "十六", "16", "sixteen", "juuroku", "juroku"],
+        photo: "images/count-16-circles.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "num-17-stars",
+        kind: "number",
+        count: 17,
+        display: "じゅうなな",
+        hiragana: "じゅうなな",
+        romaji: "jūnana",
+        spoken: "じゅうなな",
+        slowSpoken: "じゅ、う、な、な。じゅうなな。",
+        meaningZh: "十七（17個）",
+        hintZh: "數一數有幾顆星星？",
+        sentence: "ほしがじゅうななこあります。",
+        sentenceRomaji: "Hoshi ga jūnana-ko arimasu.",
+        sentenceZh: "有十七顆星星。",
+        answers: ["じゅうなな", "ジュウナナ", "じゅうしち", "十七", "17", "seventeen", "juunana", "junana", "juushichi"],
+        photo: "images/count-17-stars.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "num-18-leaves",
+        kind: "number",
+        count: 18,
+        display: "じゅうはち",
+        hiragana: "じゅうはち",
+        romaji: "jūhachi",
+        spoken: "じゅうはち",
+        slowSpoken: "じゅ、う、は、ち。じゅうはち。",
+        meaningZh: "十八（18個）",
+        hintZh: "數一數有幾片葉子？",
+        sentence: "はっぱがじゅうはちまいあります。",
+        sentenceRomaji: "Happa ga jūhachi-mai arimasu.",
+        sentenceZh: "有十八片葉子。",
+        answers: ["じゅうはち", "ジュウハチ", "十八", "18", "eighteen", "juuhachi", "juhachi"],
+        photo: "images/count-18-leaves.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "num-19-hearts",
+        kind: "number",
+        count: 19,
+        display: "じゅうきゅう",
+        hiragana: "じゅうきゅう",
+        romaji: "jūkyū",
+        spoken: "じゅうきゅう",
+        slowSpoken: "じゅ、う、きゅ、う。じゅうきゅう。",
+        meaningZh: "十九（19個）",
+        hintZh: "數一數有幾顆愛心？",
+        sentence: "ハートがじゅうきゅうこあります。",
+        sentenceRomaji: "Hāto ga jūkyū-ko arimasu.",
+        sentenceZh: "有十九顆愛心。",
+        answers: ["じゅうきゅう", "ジュウキュウ", "じゅうく", "十九", "19", "nineteen", "juukyuu", "jukyu", "juuku"],
+        photo: "images/count-19-hearts.jpg",
+        addedDate: "2026-10-02"
+      },
+      {
+        id: "num-20-balls",
+        kind: "number",
+        count: 20,
+        display: "にじゅう",
+        hiragana: "にじゅう",
+        romaji: "nijū",
+        spoken: "にじゅう",
+        slowSpoken: "に、じゅ、う。にじゅう。",
+        meaningZh: "二十（20個）",
+        hintZh: "數一數有幾個球？",
+        sentence: "ボールがにじゅうこあります。",
+        sentenceRomaji: "Bōru ga nijū-ko arimasu.",
+        sentenceZh: "有二十個球。",
+        answers: ["にじゅう", "ニジュウ", "二十", "20", "twenty", "nijuu", "niju"],
+        photo: "images/count-20-balls.jpg",
+        addedDate: "2026-10-02"
       }
     ];
+
 
     const VOCAB_ITEMS = ITEMS;
     const ALL_ITEMS = ITEMS.concat(NUMBER_ITEMS);
     const ITEM_BY_ID = Object.fromEntries(ALL_ITEMS.map(i => [i.id, i]));
     const DAILY_COUNT = 10;
-    const DAILY_NUM_MIN = 2;
-    const DAILY_NUM_MAX = 3;
+    const DAILY_NEW_VOCAB = 5;   // prefer newly added vocab
+    const DAILY_NEW_NUM = 2;     // prefer newly added number/count items
+    const DAILY_LOOKBACK_DAYS = 2; // reduce day-to-day repeats
     const STORAGE_KEY = "jpKgDaily_v1";
     const EXAM_SIZE_VERSION = 2; // bumped when daily size changed 5 → 10
-    const QUESTION_BANK_VERSION = 4; // 2026-10-02: +number bank; umbrella photo fix
+    const QUESTION_BANK_VERSION = 5; // 2026-10-02: numbers 1–20 + prefer-new daily mix
     const ANCHOR_YESTERDAY = "2026-10-01";
     const ANCHOR_TODAY = "2026-10-02";
+
+    /**
+     * Daily content batches (newest first).
+     * Routine: each day append ~5 new vocab ids + ~2 new number ids here,
+     * add entries/photos to the banks, bump QUESTION_BANK_VERSION, push Pages.
+     * Daily quiz prefers the newest batch with date <= quiz date.
+     */
+    const DAILY_NEW_BATCHES = [
+      {
+        date: "2026-10-02",
+        label: "numbers 9–20 + monkey/horse/bag/cookie/cup",
+        vocabIds: ["monkey", "horse", "bag", "cookie", "cup"],
+        numberIds: [
+          "num-9-circles", "num-10-stars", "num-11-hearts", "num-12-apples",
+          "num-13-balls", "num-14-flowers", "num-15-fish", "num-16-circles",
+          "num-17-stars", "num-18-leaves", "num-19-hearts", "num-20-balls"
+        ]
+      }
+    ];
 
     /* ========== localStorage helpers ========== */
     function dateKeyFromDate(d) {
@@ -2090,18 +2409,64 @@
       return a;
     }
 
-    function dailyNumCount(dateKey) {
-      // Date-seeded: 2 or 3 number questions (rest are vocab look-and-say)
-      const shuffled = seededShuffle(["2", "3"], "numcount-" + dateKey);
-      return Number(shuffled[0]);
+    function newestBatchForDate(dateKey) {
+      for (let i = 0; i < DAILY_NEW_BATCHES.length; i++) {
+        const b = DAILY_NEW_BATCHES[i];
+        if (b && b.date && b.date <= dateKey) return b;
+      }
+      return null;
+    }
+
+    function pickPreferring(poolIds, want, seedStr, avoidSet, already) {
+      const seen = already || new Set();
+      const valid = poolIds.filter(id => ITEM_BY_ID[id] && !seen.has(id));
+      const fresh = seededShuffle(valid.filter(id => !avoidSet.has(id)), seedStr);
+      const fallback = seededShuffle(valid.filter(id => avoidSet.has(id)), seedStr + "-fb");
+      const out = [];
+      for (const id of fresh.concat(fallback)) {
+        if (out.length >= want) break;
+        out.push(id);
+        seen.add(id);
+      }
+      return out;
+    }
+
+    function dailyItemIdsCore(dateKey, avoidSet) {
+      const batch = newestBatchForDate(dateKey);
+      const selected = new Set();
+      const newVocabPool = (batch && batch.vocabIds) ? batch.vocabIds.slice() : [];
+      const newNumPool = (batch && batch.numberIds) ? batch.numberIds.slice() : [];
+
+      pickPreferring(newVocabPool, DAILY_NEW_VOCAB, "newv-" + dateKey, avoidSet, selected);
+      pickPreferring(newNumPool, DAILY_NEW_NUM, "newn-" + dateKey, avoidSet, selected);
+
+      const numHave = Array.from(selected).filter(id => ITEM_BY_ID[id] && ITEM_BY_ID[id].kind === "number").length;
+      const numNeed = Math.max(0, DAILY_NEW_NUM - numHave);
+      const olderNums = NUMBER_ITEMS.map(i => i.id).filter(id => !selected.has(id));
+      pickPreferring(olderNums, numNeed, "oldn-" + dateKey, avoidSet, selected);
+
+      const vocabNeed = DAILY_COUNT - selected.size;
+      const olderVocab = VOCAB_ITEMS.map(i => i.id).filter(id => !selected.has(id));
+      pickPreferring(olderVocab, vocabNeed, "oldv-" + dateKey, avoidSet, selected);
+
+      if (selected.size < DAILY_COUNT) {
+        const rest = ALL_ITEMS.map(i => i.id).filter(id => !selected.has(id));
+        pickPreferring(rest, DAILY_COUNT - selected.size, "top-" + dateKey, avoidSet, selected);
+      }
+
+      const ids = Array.from(selected).slice(0, DAILY_COUNT);
+      return seededShuffle(ids, "mix-" + dateKey);
     }
 
     function dailyItemIds(dateKey) {
-      const numCount = Math.max(DAILY_NUM_MIN, Math.min(DAILY_NUM_MAX, dailyNumCount(dateKey)));
-      const vocabCount = DAILY_COUNT - numCount;
-      const vocabIds = seededShuffle(VOCAB_ITEMS.map(i => i.id), "vocab-" + dateKey).slice(0, vocabCount);
-      const numIds = seededShuffle(NUMBER_ITEMS.map(i => i.id), "num-" + dateKey).slice(0, numCount);
-      return seededShuffle(vocabIds.concat(numIds), "mix-" + dateKey);
+      // Prefer ~5 new vocab + ~2 new numbers; fill rest from older bank.
+      // Avoid ids used on the previous DAILY_LOOKBACK_DAYS to reduce day-to-day repeats.
+      const avoid = new Set();
+      for (let d = 1; d <= DAILY_LOOKBACK_DAYS; d++) {
+        const prevKey = shiftDateKey(dateKey, -d);
+        dailyItemIdsCore(prevKey, new Set()).forEach(id => avoid.add(id));
+      }
+      return dailyItemIdsCore(dateKey, avoid);
     }
 
     function isNumberItem(item) {
@@ -2895,7 +3260,7 @@
         btnCont.textContent = "▶️ 繼續" + dayLabel + "測驗（剩餘 " + (total - done) + " 題）";
       } else {
         $("homeStatusHint").textContent = isToday
-          ? ("每天固定 " + DAILY_COUNT + " 題（約7–8題看圖說名稱＋2–3題數數），依日期產生。練完可複習錯題。")
+          ? ("每天固定 " + DAILY_COUNT + " 題（約5題今日新詞＋2題新數數，其餘複習舊詞），減少連續重複。練完可複習錯題。")
           : (formatDateZh(key) + " 尚未作答。可開始該日測驗，或重考／複習。");
         btnStart.classList.remove("hidden");
         btnStart.textContent = isToday ? "📝 開始今日測驗" : ("📝 開始 " + formatDateZh(key) + " 測驗");
