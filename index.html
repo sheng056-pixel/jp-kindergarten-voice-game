@@ -2094,7 +2094,7 @@
         "ok"
       );
       const sentence = item.sentence || ("これは" + item.display + "です。");
-      await speak(sentence, { rate: 0.88 });
+      await speak(sentence, { rate: 0.75 });
       await speakZh("請跟著說一次。");
     }
 
@@ -2278,7 +2278,7 @@
             "你說的是「" + heard + "」。再聽一次句子，再跟讀一次～",
             "bad"
           );
-          await speak(sentence, { rate: 0.85 });
+          await speak(sentence, { rate: 0.75 });
         }
         awaitingShadow = false;
         clearAutoAdvance();
@@ -2635,7 +2635,7 @@
       const item = currentItem();
       const sentence = item.sentence || ("これは" + item.display + "です。");
       awaitingShadow = true;
-      speak(sentence, { rate: 0.85 });
+      speak(sentence, { rate: 0.75 });
     });
 
     $("btnShadowSay").addEventListener("click", () => {
