@@ -42,6 +42,13 @@ git push origin master
 
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
+
+## 2026-10-03 本批已完成
+
+- 新詞 5 個：`lion` らいおん／獅子、`sheep` ひつじ／羊、`cake` ケーキ／蛋糕、`spoon` スプーン／湯匙、`bed` ベッド／床
+- 新數數 2 題：`num-3-stars`（3 顆星）、`num-8-flowers`（8 朵花）
+- `QUESTION_BANK_VERSION` → 6；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-02 本批已完成
 
 - 數數庫擴充為 **1–20**（清楚 count 圖）

@@ -1667,6 +1667,88 @@
         addedDate: "2026-10-02"
       }
 
+      ,
+      {
+        id: "lion",
+        display: "らいおん",
+        hiragana: "らいおん",
+        romaji: "raion",
+        spoken: "らいおん",
+        slowSpoken: "ら、い、お、ん。らいおん。",
+        meaningZh: "獅子",
+        hintZh: "鬃毛很長的動物王",
+        sentence: "らいおんがいます。",
+        sentenceRomaji: "Raion ga imasu.",
+        sentenceZh: "有一隻獅子。",
+        answers: ["らいおん", "ライオン", "獅子", "狮子", "らいおんです", "lion", "raion", "ライオンです"],
+        photo: "images/lion.jpg",
+        addedDate: "2026-10-03"
+      },
+      {
+        id: "sheep",
+        display: "ひつじ",
+        hiragana: "ひつじ",
+        romaji: "hitsuji",
+        spoken: "ひつじ",
+        slowSpoken: "ひ、つ、じ。ひつじ。",
+        meaningZh: "羊",
+        hintZh: "白白捲毛的動物",
+        sentence: "ひつじがいます。",
+        sentenceRomaji: "Hitsuji ga imasu.",
+        sentenceZh: "有一隻羊。",
+        answers: ["ひつじ", "ヒツジ", "羊", "ひつじです", "シープ", "sheep", "hitsuji"],
+        photo: "images/sheep.jpg",
+        addedDate: "2026-10-03"
+      },
+      {
+        id: "cake",
+        display: "ケーキ",
+        hiragana: "けーき",
+        romaji: "kēki",
+        spoken: "ケーキ",
+        slowSpoken: "けー、き。ケーキ。",
+        meaningZh: "蛋糕",
+        hintZh: "甜甜的生日點心",
+        sentence: "ケーキをたべます。",
+        sentenceRomaji: "Kēki o tabemasu.",
+        sentenceZh: "吃蛋糕。",
+        answers: ["ケーキ", "けーき", "蛋糕", "ケーキです", "cake", "keki", "keeki", "kēki"],
+        photo: "images/cake.jpg",
+        addedDate: "2026-10-03"
+      },
+      {
+        id: "spoon",
+        display: "スプーン",
+        hiragana: "すぷーん",
+        romaji: "supūn",
+        spoken: "スプーン",
+        slowSpoken: "す、ぷーん。スプーン。",
+        meaningZh: "湯匙",
+        hintZh: "吃飯喝湯用的湯匙",
+        sentence: "スプーンをつかいます。",
+        sentenceRomaji: "Supūn o tsukaimasu.",
+        sentenceZh: "用湯匙。",
+        answers: ["スプーン", "すぷーん", "湯匙", "汤匙", "勺子", "スプーンです", "spoon", "supuun", "supun", "supūn"],
+        photo: "images/spoon.jpg",
+        addedDate: "2026-10-03"
+      },
+      {
+        id: "bed",
+        display: "ベッド",
+        hiragana: "べっど",
+        romaji: "beddo",
+        spoken: "ベッド",
+        slowSpoken: "べ、っ、ど。ベッド。",
+        meaningZh: "床",
+        hintZh: "晚上睡覺的地方",
+        sentence: "ベッドでねます。",
+        sentenceRomaji: "Beddo de nemasu.",
+        sentenceZh: "在床上睡覺。",
+        answers: ["ベッド", "べっど", "床", "ベッドです", "bed", "beddo"],
+        photo: "images/bed.jpg",
+        addedDate: "2026-10-03"
+      }
+
     ];
 
     /* ========== Number questions (count objects / say number) ========== */
@@ -2023,6 +2105,45 @@
         photo: "images/count-20-balls.jpg",
         addedDate: "2026-10-02"
       }
+
+      ,
+      {
+        id: "num-3-stars",
+        kind: "number",
+        count: 3,
+        display: "さん",
+        hiragana: "さん",
+        romaji: "san",
+        spoken: "さん",
+        slowSpoken: "さ、ん。さん。",
+        meaningZh: "三（3個）",
+        hintZh: "數一數有幾顆星星？",
+        sentence: "ほしがみっつあります。",
+        sentenceRomaji: "Hoshi ga mittsu arimasu.",
+        sentenceZh: "有三顆星星。",
+        answers: ["さん", "サン", "三", "3", "みっつ", "三つ", "three", "san"],
+        photo: "images/count-3-stars.jpg",
+        addedDate: "2026-10-03"
+      },
+      {
+        id: "num-8-flowers",
+        kind: "number",
+        count: 8,
+        display: "はち",
+        hiragana: "はち",
+        romaji: "hachi",
+        spoken: "はち",
+        slowSpoken: "は、ち。はち。",
+        meaningZh: "八（8個）",
+        hintZh: "數一數有幾朵花？",
+        sentence: "はながやっつあります。",
+        sentenceRomaji: "Hana ga yattsu arimasu.",
+        sentenceZh: "有八朵花。",
+        answers: ["はち", "ハチ", "八", "8", "やっつ", "八つ", "eight", "hachi"],
+        photo: "images/count-8-flowers.jpg",
+        addedDate: "2026-10-03"
+      }
+
     ];
 
 
@@ -2035,7 +2156,7 @@
     const DAILY_LOOKBACK_DAYS = 2; // reduce day-to-day repeats
     const STORAGE_KEY = "jpKgDaily_v1";
     const EXAM_SIZE_VERSION = 2; // bumped when daily size changed 5 → 10
-    const QUESTION_BANK_VERSION = 5; // 2026-10-02: numbers 1–20 + prefer-new daily mix
+    const QUESTION_BANK_VERSION = 6; // 2026-10-03: +5 vocab + 2 count variants
     const ANCHOR_YESTERDAY = "2026-10-01";
     const ANCHOR_TODAY = "2026-10-02";
 
@@ -2046,6 +2167,12 @@
      * Daily quiz prefers the newest batch with date <= quiz date.
      */
     const DAILY_NEW_BATCHES = [
+      {
+        date: "2026-10-03",
+        label: "lion/sheep/cake/spoon/bed + count 3★ & 8🌸",
+        vocabIds: ["lion", "sheep", "cake", "spoon", "bed"],
+        numberIds: ["num-3-stars", "num-8-flowers"]
+      },
       {
         date: "2026-10-02",
         label: "numbers 9–20 + monkey/horse/bag/cookie/cup",
