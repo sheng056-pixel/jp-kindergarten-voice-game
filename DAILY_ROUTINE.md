@@ -43,6 +43,12 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-04 本批已完成
+
+- 新詞 5 個：`panda` パンダ／熊貓、`giraffe` きりん／長頸鹿、`watermelon` すいか／西瓜、`fork` フォーク／叉子、`window` まど／窗戶
+- 新數數 2 題：`num-5-apples`（5 個蘋果）、`num-12-hearts`（12 顆愛心）
+- `QUESTION_BANK_VERSION` → 7；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-03 本批已完成
 
 - 新詞 5 個：`lion` らいおん／獅子、`sheep` ひつじ／羊、`cake` ケーキ／蛋糕、`spoon` スプーン／湯匙、`bed` ベッド／床

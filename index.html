@@ -1748,6 +1748,87 @@
         photo: "images/bed.jpg",
         addedDate: "2026-10-03"
       }
+      ,
+      {
+        id: "panda",
+        display: "パンダ",
+        hiragana: "ぱんだ",
+        romaji: "panda",
+        spoken: "パンダ",
+        slowSpoken: "ぱ、ん、だ。パンダ。",
+        meaningZh: "熊貓",
+        hintZh: "黑白相間愛吃竹子的動物",
+        sentence: "パンダがいます。",
+        sentenceRomaji: "Panda ga imasu.",
+        sentenceZh: "有一隻熊貓。",
+        answers: ["パンダ", "ぱんだ", "熊貓", "熊猫", "パンダです", "panda"],
+        photo: "images/panda.jpg",
+        addedDate: "2026-10-04"
+      },
+      {
+        id: "giraffe",
+        display: "きりん",
+        hiragana: "きりん",
+        romaji: "kirin",
+        spoken: "きりん",
+        slowSpoken: "き、り、ん。きりん。",
+        meaningZh: "長頸鹿",
+        hintZh: "脖子很長的動物",
+        sentence: "きりんがいます。",
+        sentenceRomaji: "Kirin ga imasu.",
+        sentenceZh: "有一隻長頸鹿。",
+        answers: ["きりん", "キリン", "長頸鹿", "长颈鹿", "きりんです", "giraffe", "kirin"],
+        photo: "images/giraffe.jpg",
+        addedDate: "2026-10-04"
+      },
+      {
+        id: "watermelon",
+        display: "すいか",
+        hiragana: "すいか",
+        romaji: "suika",
+        spoken: "すいか",
+        slowSpoken: "す、い、か。すいか。",
+        meaningZh: "西瓜",
+        hintZh: "夏天吃的綠皮紅瓤水果",
+        sentence: "すいかをたべます。",
+        sentenceRomaji: "Suika o tabemasu.",
+        sentenceZh: "吃西瓜。",
+        answers: ["すいか", "スイカ", "西瓜", "すいかです", "watermelon", "suika"],
+        photo: "images/watermelon.jpg",
+        addedDate: "2026-10-04"
+      },
+      {
+        id: "fork",
+        display: "フォーク",
+        hiragana: "ふぉーく",
+        romaji: "fōku",
+        spoken: "フォーク",
+        slowSpoken: "ふぉー、く。フォーク。",
+        meaningZh: "叉子",
+        hintZh: "吃飯戳食物用的叉子",
+        sentence: "フォークをつかいます。",
+        sentenceRomaji: "Fōku o tsukaimasu.",
+        sentenceZh: "用叉子。",
+        answers: ["フォーク", "ふぉーく", "叉子", "フォークです", "fork", "fooku", "foku", "fōku"],
+        photo: "images/fork.jpg",
+        addedDate: "2026-10-04"
+      },
+      {
+        id: "window",
+        display: "まど",
+        hiragana: "まど",
+        romaji: "mado",
+        spoken: "まど",
+        slowSpoken: "ま、ど。まど。",
+        meaningZh: "窗戶",
+        hintZh: "房間裡可以看外面的地方",
+        sentence: "まどをあけます。",
+        sentenceRomaji: "Mado o akemasu.",
+        sentenceZh: "打開窗戶。",
+        answers: ["まど", "マド", "窓", "窗戶", "窗户", "まどです", "window", "mado"],
+        photo: "images/window.jpg",
+        addedDate: "2026-10-04"
+      }
 
     ];
 
@@ -2143,6 +2224,43 @@
         photo: "images/count-8-flowers.jpg",
         addedDate: "2026-10-03"
       }
+      ,
+      {
+        id: "num-5-apples",
+        kind: "number",
+        count: 5,
+        display: "ご",
+        hiragana: "ご",
+        romaji: "go",
+        spoken: "ご",
+        slowSpoken: "ご。ご。",
+        meaningZh: "五（5個）",
+        hintZh: "數一數有幾個蘋果？",
+        sentence: "りんごがいつつあります。",
+        sentenceRomaji: "Ringo ga itsutsu arimasu.",
+        sentenceZh: "有五個蘋果。",
+        answers: ["ご", "ゴ", "五", "5", "いつつ", "五つ", "five", "go"],
+        photo: "images/count-5-apples.jpg",
+        addedDate: "2026-10-04"
+      },
+      {
+        id: "num-12-hearts",
+        kind: "number",
+        count: 12,
+        display: "じゅうに",
+        hiragana: "じゅうに",
+        romaji: "jūni",
+        spoken: "じゅうに",
+        slowSpoken: "じゅ、う、に。じゅうに。",
+        meaningZh: "十二（12個）",
+        hintZh: "數一數有幾顆愛心？",
+        sentence: "ハートがじゅうにこあります。",
+        sentenceRomaji: "Hāto ga jūni-ko arimasu.",
+        sentenceZh: "有十二顆愛心。",
+        answers: ["じゅうに", "ジュウニ", "十二", "12", "twelve", "juuni", "juni"],
+        photo: "images/count-12-hearts.jpg",
+        addedDate: "2026-10-04"
+      }
 
     ];
 
@@ -2156,7 +2274,7 @@
     const DAILY_LOOKBACK_DAYS = 2; // reduce day-to-day repeats
     const STORAGE_KEY = "jpKgDaily_v1";
     const EXAM_SIZE_VERSION = 2; // bumped when daily size changed 5 → 10
-    const QUESTION_BANK_VERSION = 6; // 2026-10-03: +5 vocab + 2 count variants
+    const QUESTION_BANK_VERSION = 7; // 2026-10-04: +5 vocab + 2 count variants
     const ANCHOR_YESTERDAY = "2026-10-01";
     const ANCHOR_TODAY = "2026-10-02";
 
@@ -2167,6 +2285,12 @@
      * Daily quiz prefers the newest batch with date <= quiz date.
      */
     const DAILY_NEW_BATCHES = [
+      {
+        date: "2026-10-04",
+        label: "panda/giraffe/watermelon/fork/window + count 5🍎 & 12♡",
+        vocabIds: ["panda", "giraffe", "watermelon", "fork", "window"],
+        numberIds: ["num-5-apples", "num-12-hearts"]
+      },
       {
         date: "2026-10-03",
         label: "lion/sheep/cake/spoon/bed + count 3★ & 8🌸",
