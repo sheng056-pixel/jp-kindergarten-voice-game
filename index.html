@@ -1828,6 +1828,86 @@
         answers: ["まど", "マド", "窓", "窗戶", "窗户", "まどです", "window", "mado"],
         photo: "images/window.jpg",
         addedDate: "2026-10-04"
+      },
+      {
+        id: "penguin",
+        display: "ペンギン",
+        hiragana: "ぺんぎん",
+        romaji: "pengin",
+        spoken: "ペンギン",
+        slowSpoken: "ぺ、ん、ぎ、ん。ペンギン。",
+        meaningZh: "企鵝",
+        hintZh: "黑白色、走路搖搖擺擺的鳥",
+        sentence: "ペンギンがあるきます。",
+        sentenceRomaji: "Pengin ga arukimasu.",
+        sentenceZh: "企鵝在走路。",
+        answers: ["ペンギン", "ぺんぎん", "企鵝", "企鹅", "ペンギンです", "penguin", "pengin"],
+        photo: "images/penguin.jpg",
+        addedDate: "2026-10-05"
+      },
+      {
+        id: "tiger",
+        display: "とら",
+        hiragana: "とら",
+        romaji: "tora",
+        spoken: "とら",
+        slowSpoken: "と、ら。とら。",
+        meaningZh: "老虎",
+        hintZh: "橘色黑條紋的大貓",
+        sentence: "とらがいます。",
+        sentenceRomaji: "Tora ga imasu.",
+        sentenceZh: "有一隻老虎。",
+        answers: ["とら", "トラ", "虎", "老虎", "とらです", "tiger", "tora"],
+        photo: "images/tiger.jpg",
+        addedDate: "2026-10-05"
+      },
+      {
+        id: "icecream",
+        display: "アイス",
+        hiragana: "あいす",
+        romaji: "aisu",
+        spoken: "アイス",
+        slowSpoken: "あ、い、す。アイス。",
+        meaningZh: "冰淇淋",
+        hintZh: "冰冰甜甜的點心",
+        sentence: "アイスをたべます。",
+        sentenceRomaji: "Aisu o tabemasu.",
+        sentenceZh: "吃冰淇淋。",
+        answers: ["アイス", "あいす", "アイスクリーム", "冰淇淋", "冰激凌", "雪糕", "アイスです", "ice cream", "icecream", "aisu"],
+        photo: "images/icecream.jpg",
+        addedDate: "2026-10-05"
+      },
+      {
+        id: "boat",
+        display: "ふね",
+        hiragana: "ふね",
+        romaji: "fune",
+        spoken: "ふね",
+        slowSpoken: "ふ、ね。ふね。",
+        meaningZh: "船",
+        hintZh: "在水上開的交通工具",
+        sentence: "ふねにのります。",
+        sentenceRomaji: "Fune ni norimasu.",
+        sentenceZh: "搭船。",
+        answers: ["ふね", "フネ", "船", "ボート", "ふねです", "boat", "ship", "fune"],
+        photo: "images/boat.jpg",
+        addedDate: "2026-10-05"
+      },
+      {
+        id: "butterfly",
+        display: "ちょうちょ",
+        hiragana: "ちょうちょ",
+        romaji: "chōcho",
+        spoken: "ちょうちょ",
+        slowSpoken: "ちょう、ちょ。ちょうちょ。",
+        meaningZh: "蝴蝶",
+        hintZh: "有漂亮翅膀會飛的昆蟲",
+        sentence: "ちょうちょがとびます。",
+        sentenceRomaji: "Chōcho ga tobimasu.",
+        sentenceZh: "蝴蝶在飛。",
+        answers: ["ちょうちょ", "チョウチョ", "ちょう", "蝶", "蝴蝶", "ちょうちょです", "butterfly", "choucho", "chocho", "chōcho"],
+        photo: "images/butterfly.jpg",
+        addedDate: "2026-10-05"
       }
 
     ];
@@ -2260,6 +2340,42 @@
         answers: ["じゅうに", "ジュウニ", "十二", "12", "twelve", "juuni", "juni"],
         photo: "images/count-12-hearts.jpg",
         addedDate: "2026-10-04"
+      },
+      {
+        id: "num-7-apples",
+        kind: "number",
+        count: 7,
+        display: "なな",
+        hiragana: "なな",
+        romaji: "nana",
+        spoken: "なな",
+        slowSpoken: "な、な。なな。",
+        meaningZh: "七（7個）",
+        hintZh: "數一數有幾個蘋果？",
+        sentence: "りんごがななこあります。",
+        sentenceRomaji: "Ringo ga nana-ko arimasu.",
+        sentenceZh: "有七個蘋果。",
+        answers: ["なな", "ナナ", "しち", "七", "7", "seven", "nana", "shichi"],
+        photo: "images/count-7-apples.jpg",
+        addedDate: "2026-10-05"
+      },
+      {
+        id: "num-16-hearts",
+        kind: "number",
+        count: 16,
+        display: "じゅうろく",
+        hiragana: "じゅうろく",
+        romaji: "jūroku",
+        spoken: "じゅうろく",
+        slowSpoken: "じゅう、ろく。じゅうろく。",
+        meaningZh: "十六（16個）",
+        hintZh: "數一數有幾顆愛心？",
+        sentence: "ハートがじゅうろっこあります。",
+        sentenceRomaji: "Hāto ga jūrokko arimasu.",
+        sentenceZh: "有十六顆愛心。",
+        answers: ["じゅうろく", "ジュウロク", "十六", "16", "sixteen", "juuroku", "juroku", "jūroku"],
+        photo: "images/count-16-hearts.jpg",
+        addedDate: "2026-10-05"
       }
 
     ];
@@ -2274,7 +2390,7 @@
     const DAILY_LOOKBACK_DAYS = 2; // reduce day-to-day repeats
     const STORAGE_KEY = "jpKgDaily_v1";
     const EXAM_SIZE_VERSION = 2; // bumped when daily size changed 5 → 10
-    const QUESTION_BANK_VERSION = 7; // 2026-10-04: +5 vocab + 2 count variants
+    const QUESTION_BANK_VERSION = 8; // 2026-10-05: +5 vocab + 2 count variants
     const ANCHOR_YESTERDAY = "2026-10-01";
     const ANCHOR_TODAY = "2026-10-02";
 
@@ -2285,6 +2401,12 @@
      * Daily quiz prefers the newest batch with date <= quiz date.
      */
     const DAILY_NEW_BATCHES = [
+      {
+        date: "2026-10-05",
+        label: "penguin/tiger/icecream/boat/butterfly + count 7🍎 & 16♡",
+        vocabIds: ["penguin", "tiger", "icecream", "boat", "butterfly"],
+        numberIds: ["num-7-apples", "num-16-hearts"]
+      },
       {
         date: "2026-10-04",
         label: "panda/giraffe/watermelon/fork/window + count 5🍎 & 12♡",
