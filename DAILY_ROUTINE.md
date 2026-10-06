@@ -43,6 +43,13 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-06 本批已完成
+
+- 新詞 5 個：`turtle` かめ／烏龜、`peach` もも／桃子、`glasses` めがね／眼鏡、`house` いえ／房子、`scissors` はさみ／剪刀
+- 新數數 2 題：`num-6-stars`（6 顆星）、`num-14-apples`（14 個蘋果）
+- 照片來源：Wikimedia Commons（CC／公有領域），裁成 800×800
+- `QUESTION_BANK_VERSION` → 9；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-05 本批已完成
 
 - 新詞 5 個：`penguin` ペンギン／企鵝、`tiger` とら／老虎、`icecream` アイス／冰淇淋、`boat` ふね／船、`butterfly` ちょうちょ／蝴蝶

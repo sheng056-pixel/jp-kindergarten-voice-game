@@ -1908,6 +1908,86 @@
         answers: ["ちょうちょ", "チョウチョ", "ちょう", "蝶", "蝴蝶", "ちょうちょです", "butterfly", "choucho", "chocho", "chōcho"],
         photo: "images/butterfly.jpg",
         addedDate: "2026-10-05"
+      },
+      {
+        id: "turtle",
+        display: "かめ",
+        hiragana: "かめ",
+        romaji: "kame",
+        spoken: "かめ",
+        slowSpoken: "か、め。かめ。",
+        meaningZh: "烏龜",
+        hintZh: "背著硬硬的殼、慢慢爬的動物",
+        sentence: "かめがおよぎます。",
+        sentenceRomaji: "Kame ga oyogimasu.",
+        sentenceZh: "烏龜在游泳。",
+        answers: ["かめ", "カメ", "亀", "烏龜", "乌龟", "海龜", "かめです", "turtle", "kame"],
+        photo: "images/turtle.jpg",
+        addedDate: "2026-10-06"
+      },
+      {
+        id: "peach",
+        display: "もも",
+        hiragana: "もも",
+        romaji: "momo",
+        spoken: "もも",
+        slowSpoken: "も、も。もも。",
+        meaningZh: "桃子",
+        hintZh: "粉粉的、軟軟甜甜的水果",
+        sentence: "ももをたべます。",
+        sentenceRomaji: "Momo o tabemasu.",
+        sentenceZh: "吃桃子。",
+        answers: ["もも", "モモ", "桃", "桃子", "ももです", "peach", "momo"],
+        photo: "images/peach.jpg",
+        addedDate: "2026-10-06"
+      },
+      {
+        id: "glasses",
+        display: "めがね",
+        hiragana: "めがね",
+        romaji: "megane",
+        spoken: "めがね",
+        slowSpoken: "め、が、ね。めがね。",
+        meaningZh: "眼鏡",
+        hintZh: "戴在眼睛前面、幫忙看清楚",
+        sentence: "めがねをかけます。",
+        sentenceRomaji: "Megane o kakemasu.",
+        sentenceZh: "戴眼鏡。",
+        answers: ["めがね", "メガネ", "眼鏡", "眼镜", "めがねです", "glasses", "megane"],
+        photo: "images/glasses.jpg",
+        addedDate: "2026-10-06"
+      },
+      {
+        id: "house",
+        display: "いえ",
+        hiragana: "いえ",
+        romaji: "ie",
+        spoken: "いえ",
+        slowSpoken: "い、え。いえ。",
+        meaningZh: "房子／家",
+        hintZh: "大家住的地方",
+        sentence: "いえにかえります。",
+        sentenceRomaji: "Ie ni kaerimasu.",
+        sentenceZh: "回家。",
+        answers: ["いえ", "イエ", "家", "房子", "うち", "いえです", "house", "home", "ie"],
+        photo: "images/house.jpg",
+        addedDate: "2026-10-06"
+      },
+      {
+        id: "scissors",
+        display: "はさみ",
+        hiragana: "はさみ",
+        romaji: "hasami",
+        spoken: "はさみ",
+        slowSpoken: "は、さ、み。はさみ。",
+        meaningZh: "剪刀",
+        hintZh: "用來剪紙的工具",
+        sentence: "はさみでかみをきります。",
+        sentenceRomaji: "Hasami de kami o kirimasu.",
+        sentenceZh: "用剪刀剪紙。",
+        answers: ["はさみ", "ハサミ", "鋏", "剪刀", "はさみです", "scissors", "hasami"],
+        photo: "images/scissors.jpg",
+        addedDate: "2026-10-06"
       }
 
     ];
@@ -2376,6 +2456,42 @@
         answers: ["じゅうろく", "ジュウロク", "十六", "16", "sixteen", "juuroku", "juroku", "jūroku"],
         photo: "images/count-16-hearts.jpg",
         addedDate: "2026-10-05"
+      },
+      {
+        id: "num-6-stars",
+        kind: "number",
+        count: 6,
+        display: "ろく",
+        hiragana: "ろく",
+        romaji: "roku",
+        spoken: "ろく",
+        slowSpoken: "ろ、く。ろく。",
+        meaningZh: "六（6個）",
+        hintZh: "數一數有幾顆星星？",
+        sentence: "ほしがむっつあります。",
+        sentenceRomaji: "Hoshi ga muttsu arimasu.",
+        sentenceZh: "有六顆星星。",
+        answers: ["ろく", "ロク", "六", "6", "むっつ", "六つ", "six", "roku"],
+        photo: "images/count-6-stars.jpg",
+        addedDate: "2026-10-06"
+      },
+      {
+        id: "num-14-apples",
+        kind: "number",
+        count: 14,
+        display: "じゅうよん",
+        hiragana: "じゅうよん",
+        romaji: "jūyon",
+        spoken: "じゅうよん",
+        slowSpoken: "じゅう、よん。じゅうよん。",
+        meaningZh: "十四（14個）",
+        hintZh: "數一數有幾個蘋果？",
+        sentence: "りんごがじゅうよんこあります。",
+        sentenceRomaji: "Ringo ga jūyon-ko arimasu.",
+        sentenceZh: "有十四個蘋果。",
+        answers: ["じゅうよん", "ジュウヨン", "じゅうし", "十四", "14", "fourteen", "juuyon", "juyon", "juushi", "jūyon"],
+        photo: "images/count-14-apples.jpg",
+        addedDate: "2026-10-06"
       }
 
     ];
@@ -2390,7 +2506,7 @@
     const DAILY_LOOKBACK_DAYS = 2; // reduce day-to-day repeats
     const STORAGE_KEY = "jpKgDaily_v1";
     const EXAM_SIZE_VERSION = 2; // bumped when daily size changed 5 → 10
-    const QUESTION_BANK_VERSION = 8; // 2026-10-05: +5 vocab + 2 count variants
+    const QUESTION_BANK_VERSION = 9; // 2026-10-06: +5 vocab + 2 count variants
     const ANCHOR_YESTERDAY = "2026-10-01";
     const ANCHOR_TODAY = "2026-10-02";
 
@@ -2401,6 +2517,12 @@
      * Daily quiz prefers the newest batch with date <= quiz date.
      */
     const DAILY_NEW_BATCHES = [
+      {
+        date: "2026-10-06",
+        label: "turtle/peach/glasses/house/scissors + count 6★ & 14🍎",
+        vocabIds: ["turtle", "peach", "glasses", "house", "scissors"],
+        numberIds: ["num-6-stars", "num-14-apples"]
+      },
       {
         date: "2026-10-05",
         label: "penguin/tiger/icecream/boat/butterfly + count 7🍎 & 16♡",
