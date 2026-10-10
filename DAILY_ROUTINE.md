@@ -43,6 +43,13 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-10 本批已完成
+
+- 新詞 5 個：`hippo` かば／河馬、`kangaroo` カンガルー／袋鼠、`broccoli` ブロッコリー／綠花椰菜、`key` かぎ／鑰匙、`taiko` たいこ／鼓
+- 新數數 2 題：`num-17-hearts`（17 顆愛心）、`num-18-apples`（18 個蘋果）
+- 照片來源：Wikimedia Commons（CC 授權），裁成 800×800
+- `QUESTION_BANK_VERSION` → 13；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-09 本批已完成
 
 - 新詞 5 個：`fox` きつね／狐狸、`squirrel` りす／松鼠、`mushroom` きのこ／蘑菇、`cherry` さくらんぼ／櫻桃、`piano` ピアノ／鋼琴
