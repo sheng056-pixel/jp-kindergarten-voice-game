@@ -43,6 +43,13 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-11 本批已完成
+
+- 新詞 5 個：`zebra` しまうま／斑馬、`chicken` にわとり／雞、`pineapple` パイナップル／鳳梨、`balloon` ふうせん／氣球、`camera` カメラ／相機
+- 新數數 2 題：`num-19-stars`（19 顆星）、`num-20-apples`（20 個蘋果）
+- 照片來源：Wikimedia Commons（CC／公有領域），裁成 800×800
+- `QUESTION_BANK_VERSION` → 14；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-10 本批已完成
 
 - 新詞 5 個：`hippo` かば／河馬、`kangaroo` カンガルー／袋鼠、`broccoli` ブロッコリー／綠花椰菜、`key` かぎ／鑰匙、`taiko` たいこ／鼓
