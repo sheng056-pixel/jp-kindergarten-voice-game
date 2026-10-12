@@ -43,6 +43,13 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-12 本批已完成
+
+- 新詞 5 個：`octopus` たこ／章魚、`whale` くじら／鯨魚、`ladybug` てんとうむし／瓢蟲、`onion` たまねぎ／洋蔥、`slide` すべりだい／溜滑梯
+- 新數數 2 題：`num-1-star`（1 顆星）、`num-2-apples`（2 個蘋果）
+- 照片來源：Wikimedia Commons（CC 授權），裁成 800×800
+- `QUESTION_BANK_VERSION` → 15；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-11 本批已完成
 
 - 新詞 5 個：`zebra` しまうま／斑馬、`chicken` にわとり／雞、`pineapple` パイナップル／鳳梨、`balloon` ふうせん／氣球、`camera` カメラ／相機
