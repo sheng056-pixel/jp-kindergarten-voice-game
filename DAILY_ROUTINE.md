@@ -43,6 +43,13 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-13 本批已完成
+
+- 新詞 5 個：`dolphin` いるか／海豚、`bee` はち／蜜蜂、`cucumber` きゅうり／小黃瓜、`guitar` ギター／吉他、`swing` ブランコ／盪鞦韆
+- 新數數 2 題：`num-3-hearts`（3 顆愛心）、`num-9-stars`（9 顆星）
+- 照片來源：Wikimedia Commons（CC／公有領域），裁成 800×800
+- `QUESTION_BANK_VERSION` → 16；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-12 本批已完成
 
 - 新詞 5 個：`octopus` たこ／章魚、`whale` くじら／鯨魚、`ladybug` てんとうむし／瓢蟲、`onion` たまねぎ／洋蔥、`slide` すべりだい／溜滑梯
