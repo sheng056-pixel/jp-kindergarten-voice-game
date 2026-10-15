@@ -43,6 +43,13 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-15 本批已完成
+
+- 新詞 5 個：`deer` しか／鹿、`pear` なし／梨、`spider` くも／蜘蛛、`chopsticks` はし／筷子、`helicopter` ヘリコプター／直升機
+- 新數數 2 題：`num-5-stars`（5 顆星）、`num-7-hearts`（7 顆愛心）
+- 照片來源：Wikimedia Commons（CC／公有領域），裁成 800×800
+- `QUESTION_BANK_VERSION` → 18；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-14 本批已完成
 
 - 新詞 5 個：`snake` へび／蛇、`ant` あり／螞蟻、`potato` じゃがいも／馬鈴薯、`telephone` でんわ／電話、`crayon` クレヨン／蠟筆

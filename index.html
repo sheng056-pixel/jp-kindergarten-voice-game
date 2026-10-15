@@ -2624,7 +2624,88 @@
         answers: ["クレヨン", "くれよん", "蠟筆", "蜡笔", "クレヨンです", "crayon", "crayons", "kureyon"],
         photo: "images/crayon.jpg",
         addedDate: "2026-10-14"
+      },
+      {
+        id: "deer",
+        display: "しか",
+        hiragana: "しか",
+        romaji: "shika",
+        spoken: "しか",
+        slowSpoken: "し、か。しか。",
+        meaningZh: "鹿",
+        hintZh: "頭上有角、會在森林裡跑的動物",
+        sentence: "しかがいます。",
+        sentenceRomaji: "Shika ga imasu.",
+        sentenceZh: "有一隻鹿。",
+        answers: ["しか", "シカ", "鹿", "しかです", "deer", "shika"],
+        photo: "images/deer.jpg",
+        addedDate: "2026-10-15"
+      },
+      {
+        id: "pear",
+        display: "なし",
+        hiragana: "なし",
+        romaji: "nashi",
+        spoken: "なし",
+        slowSpoken: "な、し。なし。",
+        meaningZh: "梨",
+        hintZh: "圓圓黃綠、咬起來脆脆的甜水果",
+        sentence: "あまいなしです。",
+        sentenceRomaji: "Amai nashi desu.",
+        sentenceZh: "這是甜梨。",
+        answers: ["なし", "ナシ", "梨", "なしです", "西洋梨", "pear", "nashi"],
+        photo: "images/pear.jpg",
+        addedDate: "2026-10-15"
+      },
+      {
+        id: "spider",
+        display: "くも",
+        hiragana: "くも",
+        romaji: "kumo",
+        spoken: "くも",
+        slowSpoken: "く、も。くも。",
+        meaningZh: "蜘蛛",
+        hintZh: "有八隻腳、會結網的小動物",
+        sentence: "くもがあみをはります。",
+        sentenceRomaji: "Kumo ga ami o harimasu.",
+        sentenceZh: "蜘蛛在結網。",
+        answers: ["くも", "クモ", "蜘蛛", "くもです", "spider", "kumo"],
+        photo: "images/spider.jpg",
+        addedDate: "2026-10-15"
+      },
+      {
+        id: "chopsticks",
+        display: "はし",
+        hiragana: "はし",
+        romaji: "hashi",
+        spoken: "はし",
+        slowSpoken: "は、し。はし。",
+        meaningZh: "筷子",
+        hintZh: "兩根細細的、吃飯時用來夾食物",
+        sentence: "はしでごはんをたべます。",
+        sentenceRomaji: "Hashi de gohan o tabemasu.",
+        sentenceZh: "用筷子吃飯。",
+        answers: ["はし", "ハシ", "箸", "筷子", "はしです", "chopsticks", "chopstick", "hashi"],
+        photo: "images/chopsticks.jpg",
+        addedDate: "2026-10-15"
+      },
+      {
+        id: "helicopter",
+        display: "ヘリコプター",
+        hiragana: "へりこぷたー",
+        romaji: "herikoputā",
+        spoken: "ヘリコプター",
+        slowSpoken: "へ、り、こ、ぷ、たー。ヘリコプター。",
+        meaningZh: "直升機",
+        hintZh: "頭頂有大螺旋槳、可以直直飛上去的飛機",
+        sentence: "ヘリコプターがとんでいます。",
+        sentenceRomaji: "Herikoputā ga tonde imasu.",
+        sentenceZh: "直升機在飛。",
+        answers: ["ヘリコプター", "へりこぷたー", "ヘリ", "へり", "直升機", "直升机", "ヘリコプターです", "helicopter", "herikoputaa", "herikoputa", "herikoputā"],
+        photo: "images/helicopter.jpg",
+        addedDate: "2026-10-15"
       }
+
 
     ];
 
@@ -3415,7 +3496,44 @@
         answers: ["はち", "ハチ", "八", "8", "やっつ", "八つ", "はっこ", "eight", "hachi", "yattsu"],
         photo: "images/count-8-apples.jpg",
         addedDate: "2026-10-14"
+      },
+      {
+        id: "num-5-stars",
+        kind: "number",
+        count: 5,
+        display: "ご",
+        hiragana: "ご",
+        romaji: "go",
+        spoken: "ご",
+        slowSpoken: "ご。ご。",
+        meaningZh: "五（5個）",
+        hintZh: "數一數有幾顆星星？",
+        sentence: "ほしがいつつあります。",
+        sentenceRomaji: "Hoshi ga itsutsu arimasu.",
+        sentenceZh: "有五顆星星。",
+        answers: ["ご", "ゴ", "五", "5", "いつつ", "五つ", "ごこ", "five", "go", "itsutsu"],
+        photo: "images/count-5-stars.jpg",
+        addedDate: "2026-10-15"
+      },
+      {
+        id: "num-7-hearts",
+        kind: "number",
+        count: 7,
+        display: "なな",
+        hiragana: "なな",
+        romaji: "nana",
+        spoken: "なな",
+        slowSpoken: "な、な。なな。",
+        meaningZh: "七（7個）",
+        hintZh: "數一數有幾顆愛心？",
+        sentence: "ハートがななつあります。",
+        sentenceRomaji: "Hāto ga nanatsu arimasu.",
+        sentenceZh: "有七顆愛心。",
+        answers: ["なな", "ナナ", "しち", "七", "7", "ななつ", "七つ", "ななこ", "seven", "nana", "shichi", "nanatsu"],
+        photo: "images/count-7-hearts.jpg",
+        addedDate: "2026-10-15"
       }
+
 
     ];
 
@@ -3429,7 +3547,7 @@
     const DAILY_LOOKBACK_DAYS = 2; // reduce day-to-day repeats
     const STORAGE_KEY = "jpKgDaily_v1";
     const EXAM_SIZE_VERSION = 2; // bumped when daily size changed 5 → 10
-    const QUESTION_BANK_VERSION = 17; // 2026-10-14: +5 vocab + 2 count variants
+    const QUESTION_BANK_VERSION = 18; // 2026-10-15: +5 vocab + 2 count variants
     const ANCHOR_YESTERDAY = "2026-10-01";
     const ANCHOR_TODAY = "2026-10-02";
 
@@ -3440,6 +3558,12 @@
      * Daily quiz prefers the newest batch with date <= quiz date.
      */
     const DAILY_NEW_BATCHES = [
+      {
+        date: "2026-10-15",
+        label: "deer/pear/spider/chopsticks/helicopter + count 5★ & 7♥",
+        vocabIds: ["deer", "pear", "spider", "chopsticks", "helicopter"],
+        numberIds: ["num-5-stars", "num-7-hearts"]
+      },
       {
         date: "2026-10-14",
         label: "snake/ant/potato/telephone/crayon + count 6♥ & 8🍎",
