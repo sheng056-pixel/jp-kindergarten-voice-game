@@ -43,6 +43,13 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-16 本批已完成
+
+- 新詞 5 個：`crocodile` わに／鱷魚、`jellyfish` くらげ／水母、`eggplant` なす／茄子、`eraser` けしゴム／橡皮擦、`sandwich` サンドイッチ／三明治
+- 新數數 2 題：`num-4-apples`（4 個蘋果）、`num-12-stars`（12 顆星）
+- 照片來源：Wikimedia Commons（CC／公有領域），裁成 800×800
+- `QUESTION_BANK_VERSION` → 19；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-15 本批已完成
 
 - 新詞 5 個：`deer` しか／鹿、`pear` なし／梨、`spider` くも／蜘蛛、`chopsticks` はし／筷子、`helicopter` ヘリコプター／直升機
