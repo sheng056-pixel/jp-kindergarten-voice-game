@@ -43,6 +43,13 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-17 本批已完成
+
+- 新詞 5 個：`goat` やぎ／山羊、`persimmon` かき／柿子、`acorn` どんぐり／橡實、`firetruck` しょうぼうしゃ／消防車、`onigiri` おにぎり／飯糰
+- 新數數 2 題：`num-14-stars`（14 顆星）、`num-10-hearts`（10 顆愛心）
+- 照片來源：Wikimedia Commons（CC／公有領域），裁成 800×800
+- `QUESTION_BANK_VERSION` → 20；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-16 本批已完成
 
 - 新詞 5 個：`crocodile` わに／鱷魚、`jellyfish` くらげ／水母、`eggplant` なす／茄子、`eraser` けしゴム／橡皮擦、`sandwich` サンドイッチ／三明治
