@@ -43,6 +43,13 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-18 本批已完成
+
+- 新詞 5 個：`shark` さめ／鯊魚、`chestnut` くり／栗子、`dragonfly` とんぼ／蜻蜓、`taxi` タクシー／計程車、`mittens` てぶくろ／手套
+- 新數數 2 題：`num-13-stars`（13 顆星）、`num-16-apples`（16 個蘋果）
+- 照片來源：Wikimedia Commons（CC 授權），處理成 800×800
+- `QUESTION_BANK_VERSION` → 21；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-17 本批已完成
 
 - 新詞 5 個：`goat` やぎ／山羊、`persimmon` かき／柿子、`acorn` どんぐり／橡實、`firetruck` しょうぼうしゃ／消防車、`onigiri` おにぎり／飯糰
