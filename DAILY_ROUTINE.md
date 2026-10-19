@@ -43,6 +43,13 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-19 本批已完成
+
+- 新詞 5 個：`sweetpotato` さつまいも／地瓜、`momiji` もみじ／楓葉、`ambulance` きゅうきゅうしゃ／救護車、`hamster` ハムスター／倉鼠、`ramen` ラーメン／拉麵
+- 新數數 2 題：`num-11-stars`（11 顆星）、`num-15-apples`（15 個蘋果）
+- 照片來源：Wikimedia Commons（CC／CC0），裁成 800×800
+- `QUESTION_BANK_VERSION` → 22；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-18 本批已完成
 
 - 新詞 5 個：`shark` さめ／鯊魚、`chestnut` くり／栗子、`dragonfly` とんぼ／蜻蜓、`taxi` タクシー／計程車、`mittens` てぶくろ／手套
