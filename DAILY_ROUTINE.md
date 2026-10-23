@@ -187,3 +187,10 @@ git push origin master
 - 新詞 5 個：`kabutomushi` カブトムシ／獨角仙、`sushi` おすし／壽司、`post` ポスト／郵筒、`tanuki` たぬき／狸貓、`yukidaruma` ゆきだるま／雪人
 - 新數數 2 題：`num-15-hearts`（15 顆愛心）、`num-20-stars`（20 顆星星）
 - 照片來源：Wikimedia Commons（CC／公有領域），裁成 800×800
+
+## 2026-10-23 本批已完成
+
+- 新詞 5 個：`ika` いか／魷魚、`melon` メロン／哈密瓜、`pizza` ピザ／披薩、`azarashi` アザラシ／海豹、`kamakiri` カマキリ／螳螂
+- 新數數 2 題：`num-16-stars`（16 顆星星）、`num-18-hearts`（18 顆愛心）
+- 照片來源：Wikimedia Commons（CC），裁成 800×800
+- `QUESTION_BANK_VERSION` → 26；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
