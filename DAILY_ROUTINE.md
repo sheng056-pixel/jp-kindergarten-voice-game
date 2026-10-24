@@ -43,6 +43,13 @@ git push origin master
 6. 確認頁面：https://sheng056-pixel.github.io/jp-kindergarten-voice-game/
 
 
+## 2026-10-24 本批已完成
+
+- 新詞 5 個：`hamburger` ハンバーガー／漢堡、`tulip` チューリップ／鬱金香、`flamingo` フラミンゴ／紅鶴、`niji` にじ／彩虹、`inko` インコ／鸚鵡
+- 新數數 2 題：`num-13-apples`（13 個蘋果）、`num-20-hearts`（20 顆愛心）
+- 照片來源：Wikimedia Commons（CC／公有領域），裁成 800×800
+- `QUESTION_BANK_VERSION` → 27；`DAILY_NEW_BATCHES` 已登記今日批次（newest first）
+
 ## 2026-10-21 本批已完成
 
 - 新詞 5 個：`hedgehog` ハリネズミ／刺蝟、`pudding` プリン／布丁、`rocket` ロケット／火箭、`cabbage` キャベツ／高麗菜、`randoseru` ランドセル／小學生書包
